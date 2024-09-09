@@ -1,0 +1,57 @@
+@startgantt Gantt
+projectscale weekly zoom 3
+saturday are closed
+sunday are closed
+2022-11-11 is closed
+2022-12-23 is closed
+
+2023-01-24 to 2023-01-26 are closed
+2023-02-10 is closed
+
+Project starts the 24th of october 2022
+
+2022-10-24 to 2022-11-10 are colored in Wheat
+saturday are colored in LightGray
+sunday are colored in LightGray
+
+[Mise en place outils] starts at 2022-10-24 and ends at 2022-11-04
+[Capture du besoin] starts at 2022-10-24 and ends at 2022-11-04
+[Création du backlog] starts at 2022-11-01 and lasts 3 days
+[Mise en place des tests] lasts 2 days
+[Création du backlog] -> [Mise en place des tests]
+
+[Mise en place terminée] happens at 2022-11-05
+[Création du backlog] -> [Mise en place terminée]
+[Mise en place outils] -> [Mise en place terminée]
+[Mise en place des tests] -> [Mise en place terminée]
+
+[Conversion des classes et interfaces] starts at 2022-11-08 and lasts 2 days
+[Conversion des attributs] lasts 1 day
+[Conversion des méthodes] starts at 2022-12-19 and lasts 1 day
+
+[Conversion des classes et interfaces] -> [Conversion des attributs]
+[Conversion des attributs] -> [Conversion des méthodes]
+
+2022-12-19 to 2022-12-22 are colored in Wheat
+
+[Extraction des données XML] starts at 2023-01-23 and lasts 5 days
+note bottom
+  Changement de projet
+  pour SoftArc XML
+  to plantuml
+end note
+2023-01-23 is colored in Wheat
+2023-01-27 is colored in Wheat
+[Conversion des classes vers UML] lasts 1 days
+[Extraction des données XML] -> [Conversion des classes vers UML]
+[Conversion des interfaces vers UML] lasts 1 days
+[Conversion des classes vers UML] -> [Conversion des interfaces vers UML]
+2023-01-30 to 2023-02-03 are colored in Wheat
+[Tests] lasts 2 days
+[Conversion des interfaces vers UML] -> [Tests]
+2023-02-06 to 2023-02-09 are colored in Wheat
+2023-02-13 to 2023-02-17 are colored in Wheat
+2023-02-20 to 2023-02-24 are colored in Wheat
+[V1.0] happens at 2023-02-24
+[Tests] -> [V1.0]
+@endgantt

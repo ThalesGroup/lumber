@@ -1,0 +1,51 @@
+@startgantt Gantt
+projectscale weekly zoom 3
+saturday are closed
+sunday are closed
+2022-11-11 is closed
+2022-12-23 is closed
+
+Project starts the 24th of october 2022
+2022-10-24 to 2022-11-10 are named [Sprint mise en place]
+
+2022-10-24 to 2022-11-10 are colored in Wheat
+saturday are colored in LightGray
+sunday are colored in LightGray
+
+[Mise en place outils] starts at 2022-10-24 and ends at 2022-11-09
+[Capture du besoin] starts at 2022-10-24 and ends at 2022-11-02
+[Création du backlog] starts at 2022-10-24 and ends at 2022-11-09
+[Mise en place des tests] lasts 4 days
+[Capture du besoin] -> [Création du backlog]
+[Capture du besoin] -> [Mise en place des tests]
+
+[Mise en place terminée] happens at 2022-11-10
+[Création du backlog] -> [Mise en place terminée]
+[Mise en place outils] -> [Mise en place terminée]
+[Mise en place des tests] -> [Mise en place terminée]
+
+[Conversion des classes et interfaces] starts at 2022-12-19 and lasts 2 days
+[Conversion des attributs] lasts 1 day
+[Conversion des méthodes] lasts 1 day
+
+[Conversion des classes et interfaces] -> [Conversion des attributs]
+[Conversion des attributs] -> [Conversion des méthodes]
+
+2022-12-19 to 2022-12-22 are colored in Wheat
+
+
+[Conversion des associations] starts at 2023-01-23 and ends at 2023-01-27
+2023-01-23 to 2023-01-27 are colored in Wheat
+[Conversion des classes vers UML] starts at 2023-01-30 and ends at 2023-02-01
+[Conversion des associations] -> [Conversion des classes vers UML]
+[Conversion des interfaces vers UML] starts at 2023-02-02 and ends at 2023-02-06
+[Conversion des classes vers UML] -> [Conversion des interfaces vers UML]
+2023-01-30 to 2023-02-03 are colored in Wheat
+[Tests] starts at 2023-02-07 and ends at 2023-02-13
+[Conversion des interfaces vers UML] -> [Tests]
+2023-02-06 to 2023-02-10 are colored in Wheat
+2023-02-13 to 2023-02-17 are colored in Wheat
+2023-02-20 to 2023-02-24 are colored in Wheat
+[V1.0] happens at 2023-02-24
+[Tests] -> [V1.0]
+@endgantt

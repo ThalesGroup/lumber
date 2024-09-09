@@ -1,0 +1,93 @@
+{
+    "name": "protobufumltranslator",
+    "version": "0.0.1",
+    "description": "A VSC extension to translate plantUML into Protobuf",
+    "main": "dist/main.js",
+    "scripts": {
+        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "fixlint": "eslint . --fix",
+        "lint": "eslint .",
+        "prettier": "prettier --write .",
+        "package": "vsce package -o protobufumltranslator.vsix",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ThalesGroup/lumber/protobufumltranslator.git"
+    },
+    "keywords": [
+        "plantuml",
+        "extension",
+        "vsc"
+    ],
+    "author": "florian.simon <florian.simon@fr.thalesgroup.com>",
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "displayName": "Protobuf / UML Translator",
+    "activationEvents": [
+        "onCommand:umltoprotobuf.umlToProtobuf",
+        "onLanguage:plantuml"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "umltoprotobuf.umlToProtobuf",
+                "title": "UML To Protobuf",
+                "shortTitle": "UMLtoProtobuf",
+                "enablement": "resourceSet && isFileSystemResource && resourceLangId == plantuml"
+            },
+            {
+                "command": "umltoprotobuf.previewToSide.umlToProtobuf",
+                "title": "Preview Protobuf To Side",
+                "enablement": "resourceLangId == plantuml"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "umltoprotobuf.umlToProtobuf",
+                    "group": "7_modification",
+                    "when": "resourceLangId == plantuml"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "umltoprotobuf.previewToSide.umlToProtobuf",
+                    "alt": "umltoprotobuf.umlToProtobuf",
+                    "group": "navigation",
+                    "when": "resourceLangId == plantuml"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "umltoprotobuf.umlToProtobuf",
+                    "group": "3_preview",
+                    "when": "resourceLangId == plantuml"
+                }
+            ]
+        }
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.0",
+        "@types/node": "^18.15.10",
+        "@types/vscode": "^1.54.0",
+        "@typescript-eslint/eslint-plugin": "^5.56.0",
+        "@typescript-eslint/parser": "^5.56.0",
+        "@vscode/vsce": "^2.27.0",
+        "esbuild": "^0.17.14",
+        "eslint": "^8.36.0",
+        "jest": "^29.5.0",
+        "nyc": "^15.1.0",
+        "prettier": "^2.8.7",
+        "ts-jest": "^29.0.5",
+        "typescript": "^5.0.2",
+        "@babel/traverse": ">=7.23.2",
+        "semver": ">=7.5.2",
+        "word-wrap": ">=1.2.5",
+        "braces": ">=3.0.3"
+    }
+}

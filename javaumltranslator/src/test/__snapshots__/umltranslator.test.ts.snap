@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UML Translator should translate a datamodel 1`] = `
+"@startuml
+abstract class Class1 extends ExtendClass implements interface1 {
+	# String attr1
+
+	- abstract String met1(param1 : Integer, param2 : Boolean)
+	+ void met2()
+}
+
+interface Interface1 {
+	+ String met1(param1 : Integer, param2 : Boolean)
+}
+
+enum Enum1 {
+	prop1
+	prop2 : 1
+}
+
+enum Enum2
+
+Class1 "1" *--> "1" Class2 : extends
+Class2 "1" *--> "1" Class3
+@enduml"
+`;
