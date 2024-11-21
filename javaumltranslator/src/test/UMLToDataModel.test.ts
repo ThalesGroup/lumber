@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from 'vitest';
 import * as assert from 'assert';
 
 import { umlToDatamodel } from '../utils/umltodatamodel';
@@ -478,7 +479,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         });
 
         it('should log a warning for unknown modifier', () => {
-            console.log = jest.fn();
+            console.log = vi.fn();
 
             umlToDatamodel('{unknown} class c01');
 

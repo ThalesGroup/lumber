@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`UML Translator should translate a datamodel 1`] = `
+exports[`UML Translator > should translate a datamodel 1`] = `
 "@startuml
 abstract class Class1 extends ExtendClass implements interface1 {
 	# String attr1

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { parse } from 'java-parser';
 import { Parameter } from '../datamodel';
 import { JavaToDatamodelVisitor } from '../utils/JavaToDatamodelVisitor';

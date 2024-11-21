@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import * as assert from 'assert';
 import { Attribute } from '../datamodel/Attribute';
 import { Class } from '../datamodel/Class';

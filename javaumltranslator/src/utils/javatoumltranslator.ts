@@ -3,7 +3,7 @@ import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
 import { UMLTranslator } from '../UMLTranslator';
 import { UMLStructure } from '../datamodel';
 import { lstat, opendir, readFile } from 'fs/promises';
-import path = require('path');
+import * as path from 'path';
 import * as vscode from 'vscode';
 
 export class JavaToUmlTranslator {
