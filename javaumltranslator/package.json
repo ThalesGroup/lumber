@@ -4,20 +4,20 @@
   "description": "Use to generate and analyse JAVA code structure.",
   "version": "1.1.0",
   "bin": {
-    "javaumltranslator": "./cli.js"
+    "javaumltranslator": "./dist/cli/javaumltranslator.js"
   },
   "engines": {
-    "vscode": "^1.54.0"
+    "vscode": "^1.74.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThalesGroup/lumber/javaumltranslator"
+    "url": "https://github.com/ThalesGroup/lumber"
   },
   "categories": [
     "Other"
   ],
-  "publisher": "Valentin COLOMER",
-  "main": "./dist/main.js",
+  "publisher": "Valentin",
+  "main": "./dist/vscode/main.js",
   "contributes": {
     "commands": [
       {
@@ -48,21 +48,21 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run esbuild-base -- --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/vscode/main.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "esbuild ./src/cli.ts --bundle --outfile=dist/cli/javaumltranslator.js --format=cjs --platform=node",
+    "watch-cli": "npm run compile -- --sourcemap --watch",
     "fixlint": "eslint . --fix",
     "lint": "eslint .",
-    "package": "vsce package --baseContentUrl \"https://nothing.com/\" --ignoreFile .vscodeignore -o javaumltranslator.vsix",
+    "package": "vsce package --baseImagesUrl \"https://github.com/ThalesGroup/lumber/raw/HEAD/javaumltranslator/\" --ignoreFile .vscodeignore -o javaumltranslator.vsix",
     "prettier": "prettier --write .",
     "test": "vitest --config vitest.config.ts"
   },
   "devDependencies": {
     "@types/node": "^22.9.1",
     "@types/vscode": "^1.54.0",
-    "@vscode/vsce": "^2.19.0",
+    "@vscode/vsce": "^3.2.1",
     "braces": ">=3.0.3",
     "esbuild": "^0.17.12",
     "nyc": "^15.1.0",
