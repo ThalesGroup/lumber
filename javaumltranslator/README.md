@@ -10,13 +10,16 @@ If you're not familiar with plantuml I suggest you to browse [their website](htt
 
 ## Compatibility
 
-Works on every version of VSC until 1.55.0, to see if your version is higher, you can open the About panel in the Help section :
+Works on every version of VSC until 1.74.0, to see if your version is higher, you can open the About panel in the Help section :
 
 ![](images/version.png)
 
 ## Installation as an extension
 
-This project is distributed as an Visual Studio Code extension.
+This project is distributed in two format :
+
+-   A Visual Studio Code extension
+-   As a command executable in a CLI
 
 If you just want to get the extension on your VSC you can download [the latest package](https://github.com/ThalesGroup/lumber/javaumltranslator/-/jobs/artifacts/main/download?job=package).
 
