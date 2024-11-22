@@ -19,7 +19,7 @@ jobs:
         id: setup-node
         uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version: '>=20.15.0'
           cache: npm
 
       - name: Find Node
