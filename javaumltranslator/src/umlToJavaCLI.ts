@@ -7,19 +7,18 @@ import { UmlToJavaTranslator } from './umltojavatranslator';
 
 program
     .version('1.0.0')
-    .description('JavaUMLTranslator')
+    .description('UML To Java Translator')
     .requiredOption(
-        '-o, --out <output>',
-        'Output, file if output is plantuml, dir otherwise'
+        '-o, --outdir <outputDirectory>',
+        'Output directory in which java files will be placed'
     )
-    .argument(
-        '<input>',
-        "Plantuml diagram or java root folder(s) (separated by ',')"
-    )
-    .action((input, options) => {
-        console.log(`Parsing file or directory, ${input} into ${options.out}`);
+    .argument('<diagram>', 'Plantuml diagram file')
+    .action((diagram, options) => {
+        console.log(
+            `Parsing file or directory, ${diagram} into ${options.outdir}`
+        );
 
-        umlToJava(input, options.out);
+        umlToJava(diagram, options.outdir);
     });
 
 async function umlToJava(diagramFile: string, outputDir: string) {

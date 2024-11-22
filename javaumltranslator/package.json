@@ -4,7 +4,8 @@
   "description": "Use to generate and analyse JAVA code structure.",
   "version": "1.1.0",
   "bin": {
-    "javaumltranslator": "./dist/cli/javaumltranslator.js"
+    "umltojava": "./dist/cli/umlToJavaCLI.js",
+    "javatouml": "./dist/cli/javaToUmlCLI.js"
   },
   "engines": {
     "vscode": "^1.74.0"
@@ -51,7 +52,7 @@
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/vscode/main.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "compile": "esbuild ./src/cli.ts --bundle --outfile=dist/cli/javaumltranslator.js --format=cjs --platform=node",
+    "build": "esbuild ./src/javaToUmlCLI.ts ./src/umlToJavaCLI.ts --bundle --outdir=dist/cli/ --format=cjs --platform=node",
     "watch-cli": "npm run compile -- --sourcemap --watch",
     "fixlint": "eslint . --fix",
     "lint": "eslint .",
