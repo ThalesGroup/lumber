@@ -1,0 +1,45 @@
+on: push
+
+jobs:
+  sea-action:
+    name: Build SEA
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Move to Working Dir
+        run: cd javaumltranslator
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Find Node
+        id: find-node
+        run:
+          echo "node=$(node -e 'console.log(process.argv[0]);')" >>
+          $env:GITHUB_OUTPUT
+
+      - name: SEA
+        id: sea
+        uses: bryopsida/node-sea-action@v1
+        with:
+          working-dir: .
+          output-dir: build
+          executable-name: umltojava
+          sea-config-path: sea-config.json
+          node-path: ${{ steps.find-node.outputs.node }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-sea
+          path: build/
+          if-no-files-found: error
