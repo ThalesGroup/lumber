@@ -4,7 +4,7 @@ jobs:
   sea-action:
     name: Build SEA
     strategy:
-      matrix: { dir: ['./javaumltranslator'], os: [ubuntu-latest] }
+      matrix: { dir: ['./javaumltranslator'], os: [ubuntu-latest, windows-latest] }
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -13,8 +13,6 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
-
-      - run: pwd
 
       - name: Setup Node.js
         id: setup-node
