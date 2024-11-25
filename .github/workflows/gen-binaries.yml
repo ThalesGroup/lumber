@@ -1,6 +1,9 @@
 on: workflow_dispatch
 
 jobs:
+  build-test:
+    uses: ./.github/workflows/build-test.yml
+
   sea-action:
     name: Build SEA
     strategy:
