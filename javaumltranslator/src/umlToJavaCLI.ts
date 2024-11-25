@@ -43,8 +43,6 @@ async function umlToJava(diagramFile: string, outputDir: string) {
 
     const files = new UmlToJavaTranslator().toJava(diagram);
 
-    console.log(files);
-
     const writes = files.map(
         async (file) =>
             new Promise(async (res, rej) => {
