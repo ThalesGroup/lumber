@@ -41,7 +41,7 @@ jobs:
           working-dir: ${{ matrix.dir }}
           output-dir: build
           executable-name: umltojava
-          sea-config-path: sea-config.json
+          sea-config-path: sea-config.ci.json
           node-path: ${{ steps.find-node.outputs.node }}
 
       - uses: actions/upload-artifact@v4
