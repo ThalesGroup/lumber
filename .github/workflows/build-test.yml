@@ -27,16 +27,6 @@ jobs:
 
       - name: Build
         run: npm run build
-
-  tests:
-    name: Tests
-    needs: build
-    strategy:
-      matrix: { os: [ubuntu-latest, windows-latest] }
-    runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: javaumltranslator
-    steps:
+        
       - name: Test Project
         run: npm test
