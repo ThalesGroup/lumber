@@ -1,0 +1,35 @@
+on: workflow_dispatch
+
+jobs:
+  sea-action:
+    name: Build SEA
+    strategy:
+      matrix: { os: [ubuntu-latest, windows-latest] }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: ./javaumltranslator
+    steps:
+      - name: Build Project
+        uses: ./.github/workflows/build.yml
+
+      - name: Find Node
+        id: find-node
+        run: echo "node=$(node -e 'console.log(process.argv[0]);')" >>
+          $env:GITHUB_OUTPUT
+
+      - name: SEA
+        id: sea
+        uses: bryopsida/node-sea-action@v1
+        with:
+          working-dir: ./javaumltranslator
+          output-dir: build
+          executable-name: umltojava
+          sea-config-path: sea-config.ci.json
+          node-path: ${{ steps.find-node.outputs.node }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-sea
+          path: build/
+          if-no-files-found: error
