@@ -29,6 +29,3 @@ jobs:
         
       - name: Test Project
         run: npm test
-
-  deploy:
-    uses: ./.github/workflows/gen-binaries.yml
