@@ -1,0 +1,69 @@
+name: "Build SEA"
+
+on:
+  workflow_call:
+    inputs:
+      # Name of the project folder
+      projectFolder:
+        type: string
+        required: true
+      commandName:
+        type: string
+        required: true
+      # Path to the js file from the project folder src, exemple: ${{ projectFolder }}/dist/cli/myCommand.js
+      commandPath:
+        type: string
+        required: true
+
+
+jobs:
+  sea:
+    strategy:
+      matrix: { os: [ubuntu-latest, windows-latest] }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.projectFolder }} 
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.15.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        
+      - name: Test Project
+        run: npm test
+
+      - name: Find Node
+        id: find-node
+        run: echo "node=$(node -e 'console.log(process.argv[0]);')" >>
+          $env:GITHUB_OUTPUT
+
+      - name: Create SEA Config
+        run: "echo \"{\\\"main\\\": \\\"./${{ inputs.projectFolder }}/${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > ${{ inputs.projectFolder }}/sea-config.json"
+
+      - name: SEA
+        id: sea
+        uses: bryopsida/node-sea-action@v1
+        with:
+          working-dir: ${{ inputs.projectFolder }}
+          output-dir: build
+          executable-name: ${{ inputs.commandName }}
+          sea-config-path: sea-config.json
+          node-path: ${{ steps.find-node.outputs.node }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{commandName}}-${{ matrix.os }}-sea
+          path: build/
+          if-no-files-found: error
