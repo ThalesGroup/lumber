@@ -3,7 +3,7 @@ on:
     
 jobs:
   build:
-    name: Build Project
+    name: Build & Test
     strategy:
       matrix: { dir: ['./javaumltranslator'], os: [ubuntu-latest, windows-latest] }
     runs-on: ${{ matrix.os }}
