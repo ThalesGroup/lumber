@@ -1,0 +1,39 @@
+on: push
+
+jobs:
+  deploy:
+    name: Deploy
+    strategy:
+      matrix: { dir: ['javaumltranslator'] }
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ matrix.dir }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.15.0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        
+      - name: Test Project
+        run: npm test
+
+      - name: Generate Extension VSIX
+        run: npm run package
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.dir }}.vsix
+          path: ${{matrix.dir}}/${{ matrix.dir }}.vsix
+          if-no-files-found: error

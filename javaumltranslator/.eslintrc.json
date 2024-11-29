@@ -13,6 +13,6 @@
     "ignorePatterns": ["out", "dist", "**/*.d.ts"],
     "globals": {
         "module": "writable",
-        "require": "readable"
+        "require": "readonly"
     }
 }

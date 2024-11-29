@@ -1,0 +1,4 @@
+{
+    "main": "./dist/cli/umlToJavaCLI.js",
+    "output": "./umlToJava.blob"
+}

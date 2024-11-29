@@ -1,0 +1,16 @@
+name: "JavaUMLTranslator - Binaries"
+on: 
+  workflow_dispatch:
+
+jobs:
+  sea-trigger-umltojava:
+    uses: ./.github/workflows/sea.yml
+    with:
+      commandPath: ./javaumltranslator/dist/cli/umlToJavaCLI.js
+      commandName: umlToJava
+      
+  sea-trigger-javaToUml:
+    uses: ./.github/workflows/sea.yml
+    with:
+      commandPath: ./javaumltranslator/dist/cli/javaToUmlCLI.js
+      commandName: javaToUml

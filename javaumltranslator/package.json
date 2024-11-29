@@ -58,11 +58,12 @@
     "lint": "eslint .",
     "package": "vsce package --baseImagesUrl \"https://github.com/ThalesGroup/lumber/raw/HEAD/javaumltranslator/\" --ignoreFile .vscodeignore -o javaumltranslator.vsix",
     "prettier": "prettier --write .",
-    "test": "vitest --config vitest.config.ts"
+    "test": "vitest run --coverage --config vitest.config.ts"
   },
   "devDependencies": {
     "@types/node": "^22.9.1",
     "@types/vscode": "^1.54.0",
+    "@vitest/coverage-v8": "^2.1.5",
     "@vscode/vsce": "^3.2.1",
     "braces": ">=3.0.3",
     "esbuild": "^0.17.12",
