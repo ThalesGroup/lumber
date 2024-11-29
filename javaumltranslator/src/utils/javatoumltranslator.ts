@@ -3,7 +3,7 @@ import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
 import { UMLTranslator } from '../UMLTranslator';
 import { UMLStructure } from '../datamodel';
 import { lstat, opendir, readFile } from 'fs/promises';
-import path = require('path');
+import { join } from 'path';
 import * as vscode from 'vscode';
 
 export class JavaToUmlTranslator {
@@ -39,7 +39,7 @@ export class JavaToUmlTranslator {
                 if (stats.isDirectory()) {
                     const dir = await opendir(currentUri);
                     for await (const dirent of dir)
-                        fromUri.push(path.join(currentUri, dirent.name));
+                        fromUri.push(join(currentUri, dirent.name));
                 } else if (stats.isFile()) {
                     if (currentUri.endsWith('.java')) allFiles.push(currentUri);
                 } else {

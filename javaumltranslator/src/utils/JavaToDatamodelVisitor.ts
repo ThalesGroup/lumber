@@ -31,8 +31,8 @@ import {
     FormalParameterListCtx,
     VariableParaRegularParameterCtx,
     VariableArityParameterCtx,
-    SuperclassCtx,
-    SuperinterfacesCtx,
+    ClassExtendsCtx,
+    ClassImplementsCtx,
     ClassTypeCtx,
     InterfaceTypeListCtx,
     InterfaceTypeCtx,
@@ -163,27 +163,27 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
 
         let implementsArray: string[] = [];
 
-        if (ctx.superinterfaces)
-            implementsArray = this.superinterfaces(
-                ctx.superinterfaces[0].children
+        if (ctx.classImplements)
+            implementsArray = this.classImplements(
+                ctx.classImplements[0].children
             );
 
         return {
             className,
             methods: classBody?.methods,
             attributes: classBody?.attributes,
-            extends: ctx.superclass
-                ? this.superclass(ctx.superclass[0].children)
+            extends: ctx.classExtends
+                ? this.classExtends(ctx.classExtends[0].children)
                 : undefined,
             implements: implementsArray
         };
     }
 
-    superclass(ctx: SuperclassCtx) {
+    classExtends(ctx: ClassExtendsCtx) {
         return this.classType(ctx.classType[0].children);
     }
 
-    superinterfaces(ctx: SuperinterfacesCtx) {
+    classImplements(ctx: ClassImplementsCtx) {
         return this.interfaceTypeList(ctx.interfaceTypeList[0].children);
     }
 
@@ -376,9 +376,9 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
     enumDeclaration(ctx: EnumDeclarationCtx) {
         const name = this.typeIdentifier(ctx.typeIdentifier[0].children);
 
-        if (ctx.superinterfaces) {
-            const interfaces = this.superinterfaces(
-                ctx.superinterfaces[0].children
+        if (ctx.classImplements) {
+            const interfaces = this.classImplements(
+                ctx.classImplements[0].children
             );
 
             // Yes, enums can implements interfaces ;)
@@ -435,6 +435,8 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
         const name = this.variableDeclaratorList(
             ctx.variableDeclaratorList[0].children
         );
+
+        if(!name) return;
 
         const associationClass = this.getAssociationClass(
             ctx.unannType[0].children
@@ -619,8 +621,14 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
         return this.variableDeclaratorId(ctx.variableDeclaratorId[0].children);
     }
 
+    /**
+     * In JDK 22 there is the new feature of unnamed variable (defined by undercore '_') to ommit certain variables when not needed
+     * So the variableDeclaratorId can now be null
+     * @param ctx The ctx
+     * @returns null if an unnamed variable, name of the variable otherwise
+     */
     variableDeclaratorId(ctx: VariableDeclaratorIdCtx) {
-        return ctx.Identifier[0].image;
+        return ctx.Identifier?.[0].image;
     }
 
     formalParameterList(ctx: FormalParameterListCtx) {
@@ -651,8 +659,12 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
     }
 
     variableParaRegularParameter(ctx: VariableParaRegularParameterCtx) {
+        const parameterName = this.variableDeclaratorId(ctx.variableDeclaratorId[0].children);
+
+        if(!parameterName) return;
+
         return new Parameter(
-            this.variableDeclaratorId(ctx.variableDeclaratorId[0].children),
+            parameterName,
             this.unannType(ctx.unannType[0].children) || 'UnknownType'
         );
     }

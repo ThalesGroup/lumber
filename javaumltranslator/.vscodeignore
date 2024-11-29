@@ -3,4 +3,4 @@
 
 # Keep
 !LICENSE.md
-!dist/main.js
+!dist/vscode/main.js

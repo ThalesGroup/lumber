@@ -1,29 +1,18 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { JavaFile, UmlToJavaTranslator } from './umltojavatranslator';
 import { JavaToUmlTranslator } from './utils/javatoumltranslator';
 import { writeFile } from 'fs/promises';
 import { readFileSync } from 'fs';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('javaumltranslator is now active!!!');
+    console.log('javaumltranslator is now active!');
 
     const umlToJavaTranslator: UmlToJavaTranslator = new UmlToJavaTranslator();
     const javaToUmlTranslator: JavaToUmlTranslator = new JavaToUmlTranslator();
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with registerCommand
-    // The commandId parameter must match the command field in package.json
     const umlToJavaDisposable = vscode.commands.registerCommand(
         'javaumltranslator.umlToJava',
         async (uri: vscode.Uri) => {
-            // The code you place here will be executed every time your command is executed
-            // Display a message box to the user
             let umlCode;
             if (uri) {
                 // Context menu
@@ -134,7 +123,6 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('JavaToUml subscribed');
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {
     console.log('Java To UML Translator deactivated');
 }
