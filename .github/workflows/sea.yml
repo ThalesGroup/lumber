@@ -51,12 +51,14 @@ jobs:
 
       - name: Create SEA Config
         run: "echo \"{\\\"main\\\": \\\"${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > sea-config.json"
+        shell: bash
 
       - name: PWD & Echo config
         run: |
           pwd
           ls -la
           echo sea-config.json
+        shell: bash
 
       - name: SEA
         id: sea
