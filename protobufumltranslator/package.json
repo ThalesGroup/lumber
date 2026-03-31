@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "description": "A VSC extension to translate plantUML into Protobuf",
     "main": "dist/main.js",
+    "publisher": "Lumber Team",
     "scripts": {
         "vscode:prepublish": "npm run esbuild-base -- --minify",
         "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
