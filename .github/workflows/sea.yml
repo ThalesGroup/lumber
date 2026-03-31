@@ -19,7 +19,7 @@ on:
 jobs:
   sea:
     strategy:
-      matrix: { os: [ubuntu-latest, windows-latest] }
+      matrix: { os: [ubuntu-latest] }
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -50,7 +50,15 @@ jobs:
           $env:GITHUB_OUTPUT
 
       - name: Create SEA Config
-        run: "echo \"{\\\"main\\\": \\\"./${{ inputs.projectFolder }}/${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > ${{ inputs.projectFolder }}/sea-config.json"
+        run: "echo \"{\\\"main\\\": \\\"${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > sea-config.json"
+        shell: bash
+
+      - name: PWD & Echo config
+        run: |
+          pwd
+          ls -la
+          echo sea-config.json
+        shell: bash
 
       - name: SEA
         id: sea
@@ -64,6 +72,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{commandName}}-${{ matrix.os }}-sea
+          name: ${{ inputs.commandName }}-${{ matrix.os }}-sea
           path: build/
           if-no-files-found: error

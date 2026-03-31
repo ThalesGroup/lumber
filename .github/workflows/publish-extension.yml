@@ -1,16 +1,22 @@
 on:
-  push:
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Select one project to build VSIX'
+        required: true
+        default: 'javaumltranslator'
+        type: choice
+        options:
+          - javaumltranslator
+          - protobufumltranslator
 
 jobs:
   deploy:
     name: Deploy
-    strategy:
-      matrix: { dir: ['javaumltranslator'] }
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ matrix.dir }}
+        working-directory: ${{ inputs.project }}
     steps:
       - name: Checkout
         id: checkout
@@ -24,9 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Build
-        run: npm run build
         
       - name: Test Project
         run: npm test
@@ -36,6 +39,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.dir }}.vsix
-          path: ${{matrix.dir}}/${{ matrix.dir }}.vsix
+          name: ${{ inputs.project }}.vsix
+          path: ${{ inputs.project }}/${{ inputs.project }}.vsix
           if-no-files-found: error

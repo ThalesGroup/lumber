@@ -6,11 +6,13 @@ jobs:
   sea-trigger-umltojava:
     uses: ./.github/workflows/sea.yml
     with:
+      projectFolder: ./javaumltranslator
       commandPath: ./javaumltranslator/dist/cli/umlToJavaCLI.js
       commandName: umlToJava
       
   sea-trigger-javaToUml:
     uses: ./.github/workflows/sea.yml
     with:
+      projectFolder: ./javaumltranslator
       commandPath: ./javaumltranslator/dist/cli/javaToUmlCLI.js
       commandName: javaToUml
