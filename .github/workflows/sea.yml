@@ -56,7 +56,7 @@ jobs:
         id: sea
         uses: bryopsida/node-sea-action@v1
         with:
-          working-dir: .
+          working-dir: ${{ inputs.projectFolder }}
           output-dir: build
           executable-name: ${{ inputs.commandName }}
           sea-config-path: sea-config.json
