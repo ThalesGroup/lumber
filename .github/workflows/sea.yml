@@ -50,13 +50,13 @@ jobs:
           $env:GITHUB_OUTPUT
 
       - name: Create SEA Config
-        run: "echo \"{\\\"main\\\": \\\"./${{ inputs.projectFolder }}/${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > ${{ inputs.projectFolder }}/sea-config.json"
+        run: "echo \"{\\\"main\\\": \\\"${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > sea-config.json"
 
       - name: SEA
         id: sea
         uses: bryopsida/node-sea-action@v1
         with:
-          working-dir: ${{ inputs.projectFolder }}
+          working-dir: .
           output-dir: build
           executable-name: ${{ inputs.commandName }}
           sea-config-path: sea-config.json
