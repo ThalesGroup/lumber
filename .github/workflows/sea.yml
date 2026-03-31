@@ -64,6 +64,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{commandName}}-${{ matrix.os }}-sea
+          name: ${{ inputs.commandName }}-${{ matrix.os }}-sea
           path: build/
           if-no-files-found: error
