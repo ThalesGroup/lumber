@@ -19,7 +19,7 @@ on:
 jobs:
   sea:
     strategy:
-      matrix: { os: [ubuntu-latest, windows-latest] }
+      matrix: { os: [ubuntu-latest] }
     runs-on: ${{ matrix.os }}
     defaults:
       run:
