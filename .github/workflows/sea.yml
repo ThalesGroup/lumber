@@ -52,6 +52,12 @@ jobs:
       - name: Create SEA Config
         run: "echo \"{\\\"main\\\": \\\"${{ inputs.commandPath }}\\\", \\\"output\\\": \\\"./${{ inputs.commandName }}.blob\\\"}\" > sea-config.json"
 
+      - name: PWD & Echo config
+        run: |
+          pwd
+          ls -la
+          echo sea-config.json
+
       - name: SEA
         id: sea
         uses: bryopsida/node-sea-action@v1
