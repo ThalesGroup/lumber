@@ -19,7 +19,7 @@ on:
 jobs:
   sea:
     strategy:
-      matrix: { os: [ubuntu-latest] }
+      matrix: { os: [ubuntu-latest, windows-latest] }
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -62,7 +62,7 @@ jobs:
 
       - name: SEA
         id: sea
-        uses: bryopsida/node-sea-action@v1
+        uses: vcolomer/node-sea-action@v1 # Replace w/ bryopsida/node-sea-action@v1 when following MR is merged: https://github.com/bryopsida/node-sea-action/pull/124
         with:
           working-dir: ${{ inputs.projectFolder }}
           output-dir: build
