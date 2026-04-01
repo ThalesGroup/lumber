@@ -1,3 +1,5 @@
+name: Generate VSIX # Rename to "Publish VSIX" when extensions will be public
+
 on:
   workflow_dispatch:
     inputs:

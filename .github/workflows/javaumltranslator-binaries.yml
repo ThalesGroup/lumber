@@ -1,4 +1,4 @@
-name: "JavaUMLTranslator - Binaries"
+name: "JavaUMLTranslator - Binaries (SEA)"
 on: 
   workflow_dispatch:
 
