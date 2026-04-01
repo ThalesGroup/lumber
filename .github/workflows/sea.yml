@@ -62,7 +62,7 @@ jobs:
 
       - name: SEA
         id: sea
-        uses: vcolomer/node-sea-action@v1 # Replace w/ bryopsida/node-sea-action@v1 when following MR is merged: https://github.com/bryopsida/node-sea-action/pull/124
+        uses: vcolomer/node-sea-action@main # Replace w/ bryopsida/node-sea-action@v1 when following MR is merged: https://github.com/bryopsida/node-sea-action/pull/124
         with:
           working-dir: ${{ inputs.projectFolder }}
           output-dir: build
