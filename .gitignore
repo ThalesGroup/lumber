@@ -4,4 +4,3 @@ dist/
 out/
 coverage/
 *.vsix
-.vscode/

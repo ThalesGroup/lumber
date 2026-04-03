@@ -436,7 +436,7 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
             ctx.variableDeclaratorList[0].children
         );
 
-        if(!name) return;
+        if (!name) return;
 
         const associationClass = this.getAssociationClass(
             ctx.unannType[0].children
@@ -659,9 +659,11 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
     }
 
     variableParaRegularParameter(ctx: VariableParaRegularParameterCtx) {
-        const parameterName = this.variableDeclaratorId(ctx.variableDeclaratorId[0].children);
+        const parameterName = this.variableDeclaratorId(
+            ctx.variableDeclaratorId[0].children
+        );
 
-        if(!parameterName) return;
+        if (!parameterName) return;
 
         return new Parameter(
             parameterName,

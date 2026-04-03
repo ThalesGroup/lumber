@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { lstat, opendir, readdir, readFile, writeFile } from 'fs/promises';
+import { lstat, opendir, readFile, writeFile } from 'fs/promises';
 import { parse } from 'java-parser';
 import { join } from 'path';
 import { exit } from 'process';

@@ -45,9 +45,9 @@ async function umlToJava(diagramFile: string, outputDir: string) {
 
     const writes = files.map(
         async (file) =>
-            new Promise(async (res, rej) => {
+            new Promise((res, rej) => {
                 const filepath = join(outputDir, file.name + '.java');
-                await writeFile(filepath, file.body)
+                writeFile(filepath, file.body)
                     .then(() => {
                         console.log(`Generated file ${filepath}`);
                         res(true);
