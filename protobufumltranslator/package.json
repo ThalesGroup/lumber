@@ -78,8 +78,6 @@
         "@types/jest": "^29.5.0",
         "@types/node": "^18.15.10",
         "@types/vscode": "^1.54.0",
-        "@typescript-eslint/eslint-plugin": "^5.56.0",
-        "@typescript-eslint/parser": "^5.56.0",
         "@vscode/vsce": "^3.7.1",
         "braces": ">=3.0.3",
         "esbuild": "^0.27.4",
@@ -89,7 +87,7 @@
         "prettier": "^2.8.7",
         "semver": ">=7.5.2",
         "ts-jest": "^29.0.5",
-        "typescript": "^5.0.2",
+        "typescript": "^6.0.2",
         "word-wrap": ">=1.2.5"
     }
 }
