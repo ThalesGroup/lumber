@@ -4,12 +4,12 @@ import {
     Class,
     Enum,
     EnumProperty,
+    Interface,
     Method,
     MultiplicityType,
     Parameter,
-    VisibleType,
-    Interface,
-    UMLStructure
+    UMLStructure,
+    VisibleType
 } from '../datamodel';
 
 describe('DataModel', () => {
