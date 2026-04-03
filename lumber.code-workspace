@@ -28,7 +28,6 @@
             "javaumltranslator": true,
             "protobufumltranslator": true,
             "datamodel": true
-        },
-        "typescript.tsdk": "protobufumltranslator\\node_modules\\typescript\\lib"
+        }
     }
 }

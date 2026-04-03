@@ -1,13 +1,12 @@
 import * as vscode from 'vscode';
 
-import { umlToDatamodel } from './utils/umltodatamodel';
 import { readFileSync } from 'fs';
 import { ProtobufTranslator } from './ProtobufTranslator';
+import { umlToDatamodel } from './utils/umltodatamodel';
 
 const TRANSLATOR = new ProtobufTranslator();
 
 async function umlToProtobuf(previewToSide: boolean, umlStr: string) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const dataModel = umlToDatamodel(umlStr);
 
     const protobufStr = TRANSLATOR.translateAll(dataModel);

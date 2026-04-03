@@ -15,7 +15,10 @@
         "type": "git",
         "url": "git+https://github.com/ThalesGroup/lumber.git"
     },
-    "keywords": ["plantuml", "puml"],
+    "keywords": [
+        "plantuml",
+        "puml"
+    ],
     "author": "Valentin COLOMER",
     "license": "Apache-2.0",
     "bugs": {
@@ -24,7 +27,7 @@
     "homepage": "https://github.com/ThalesGroup/lumber#readme",
     "devDependencies": {
         "@types/node": "^25.5.0",
-        "eslint": "^9.39.4",
+        "eslint": "^10.1.0",
         "prettier": "^3.8.1",
         "typescript": "^6.0.2"
     }
