@@ -1,73 +1,74 @@
 import {
     BaseJavaCstVisitorWithDefaults,
-    ClassDeclarationCtx,
-    NormalClassDeclarationCtx,
-    MethodDeclarationCtx,
-    ClassModifierCtx,
-    TypeIdentifierCtx,
     ClassBodyCtx,
     ClassBodyDeclarationCtx,
-    ClassMemberDeclarationCtx,
-    MethodHeaderCtx,
-    MethodDeclaratorCtx,
-    ResultCtx,
-    UnannTypeCtx,
-    UnannPrimitiveTypeWithOptionalDimsSuffixCtx,
-    UnannReferenceTypeCtx,
-    UnannPrimitiveTypeCtx,
-    NumericTypeCtx,
-    IntegralTypeCtx,
-    FloatingPointTypeCtx,
-    UnannClassOrInterfaceTypeCtx,
-    UnannClassTypeCtx,
-    FieldDeclarationCtx,
-    FieldModifierCtx,
-    VariableDeclaratorListCtx,
-    VariableDeclaratorCtx,
-    VariableDeclaratorIdCtx,
-    MethodModifierCtx,
-    TypeParameterCtx,
-    FormalParameterCtx,
-    FormalParameterListCtx,
-    VariableParaRegularParameterCtx,
-    VariableArityParameterCtx,
+    ClassDeclarationCtx,
     ClassExtendsCtx,
     ClassImplementsCtx,
+    ClassMemberDeclarationCtx,
+    ClassModifierCtx,
+    ClassOrInterfaceTypeCtx,
     ClassTypeCtx,
-    InterfaceTypeListCtx,
-    InterfaceTypeCtx,
-    InterfaceDeclarationCtx,
-    InterfaceModifierCtx,
-    NormalInterfaceDeclarationCtx,
+    DimsCtx,
+    EnumBodyCtx,
+    EnumConstantCtx,
+    EnumConstantListCtx,
+    EnumDeclarationCtx,
+    FieldDeclarationCtx,
+    FieldModifierCtx,
+    FloatingPointTypeCtx,
+    FormalParameterCtx,
+    FormalParameterListCtx,
+    ImportDeclarationCtx,
+    IntegralTypeCtx,
     InterfaceBodyCtx,
+    InterfaceDeclarationCtx,
     InterfaceMemberDeclarationCtx,
     InterfaceMethodDeclarationCtx,
     InterfaceMethodModifierCtx,
-    EnumDeclarationCtx,
-    EnumBodyCtx,
-    EnumConstantListCtx,
-    EnumConstantCtx,
+    InterfaceModifierCtx,
+    InterfaceTypeCtx,
+    InterfaceTypeListCtx,
+    MethodDeclarationCtx,
+    MethodDeclaratorCtx,
+    MethodHeaderCtx,
+    MethodModifierCtx,
+    NormalClassDeclarationCtx,
+    NormalInterfaceDeclarationCtx,
+    NumericTypeCtx,
     PackageDeclarationCtx,
-    TypeArgumentsCtx,
-    TypeArgumentListCtx,
-    TypeArgumentCtx,
+    PrimitiveTypeCtx,
     ReferenceTypeCtx,
-    DimsCtx,
-    ClassOrInterfaceTypeCtx,
-    PrimitiveTypeCtx
+    ResultCtx,
+    TypeArgumentCtx,
+    TypeArgumentListCtx,
+    TypeArgumentsCtx,
+    TypeIdentifierCtx,
+    TypeParameterCtx,
+    UnannClassOrInterfaceTypeCtx,
+    UnannClassTypeCtx,
+    UnannPrimitiveTypeCtx,
+    UnannPrimitiveTypeWithOptionalDimsSuffixCtx,
+    UnannReferenceTypeCtx,
+    UnannTypeCtx,
+    VariableArityParameterCtx,
+    VariableDeclaratorCtx,
+    VariableDeclaratorIdCtx,
+    VariableDeclaratorListCtx,
+    VariableParaRegularParameterCtx
 } from 'java-parser';
 import {
-    UMLStructure,
-    Method,
-    VisibleType,
-    Class,
-    Attribute,
-    Parameter,
-    Interface,
-    Enum,
     Association,
+    Attribute,
+    Class,
+    Enum,
+    EnumProperty,
+    Interface,
+    Method,
     MultiplicityType,
-    EnumProperty
+    Parameter,
+    UMLStructure,
+    VisibleType
 } from '../datamodel';
 
 type ClassMembers = {
@@ -78,11 +79,13 @@ type ClassMembers = {
 export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
     private structure: UMLStructure;
     private currentPackage: string;
+    private allImports: ImportDeclarationCtx[];
 
     constructor() {
         super();
         this.structure = new UMLStructure();
         this.currentPackage = '';
+        this.allImports = [];
         this.validateVisitor();
     }
 
@@ -90,8 +93,13 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
         return this.structure;
     }
 
-    clearPackage() {
+    clear() {
         this.currentPackage = '';
+        this.allImports = [];
+    }
+
+    importDeclaration(ctx: ImportDeclarationCtx) {
+        this.allImports.push(ctx);
     }
 
     packageDeclaration(ctx: PackageDeclarationCtx) {
@@ -682,11 +690,35 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
         TYPES
     */
 
+    /**
+     * This method search for an existing import for the given type
+     * @param typeName The type to look for in the import section
+     * @returns ImportDeclarationCtx or undefined if not found
+     */
+    findImportForTypeName(typeName: string) {
+        const interfaceImport = this.allImports.find(
+            (imp) =>
+                imp.packageOrTypeName?.[0].children.Identifier.reverse()[0]
+                    .image == typeName
+        );
+        return interfaceImport;
+    }
+
     interfaceTypeList(ctx: InterfaceTypeListCtx) {
         const implementsArray: string[] = [];
 
         for (const { children: implement } of ctx.interfaceType) {
-            implementsArray.push(this.interfaceType(implement));
+            const interfaceName = this.interfaceType(implement);
+            const fullyQualifiedInterfaceName =
+                this.findImportForTypeName(interfaceName);
+            implementsArray.push(
+                fullyQualifiedInterfaceName &&
+                    fullyQualifiedInterfaceName.packageOrTypeName
+                    ? fullyQualifiedInterfaceName.packageOrTypeName[0].children.Identifier.reverse()
+                          .map((t) => t.image)
+                          .join('.')
+                    : interfaceName
+            );
         }
 
         return implementsArray;
@@ -705,7 +737,13 @@ export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
     }
 
     classType(ctx: ClassTypeCtx) {
-        return ctx.Identifier.map((i) => i.image).join('.');
+        const className = ctx.Identifier.map((i) => i.image).join('.');
+        const fullClassName = this.findImportForTypeName(className);
+        return fullClassName && fullClassName.packageOrTypeName
+            ? fullClassName.packageOrTypeName[0].children.Identifier.reverse()
+                  .map((t) => t.image)
+                  .join('.')
+            : className;
     }
 
     unannType(ctx: UnannTypeCtx) {

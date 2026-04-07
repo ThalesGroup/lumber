@@ -55,7 +55,7 @@ program
 
         console.log('Starting parsing files...');
         for (const file of files) {
-            myVisitor.clearPackage();
+            myVisitor.clear();
             console.log(`- Parsing : ${file}...`);
             const cst = parse(await readFile(file, { encoding: 'utf-8' }));
             myVisitor.visit(cst);
