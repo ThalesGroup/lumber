@@ -81,6 +81,7 @@
     "commander": "^12.1.0",
     "java-parser": "^2.3.2",
     "semver": ">=7.5.2",
+    "umltranslator-datamodel": "file:../datamodel",
     "word-wrap": ">=1.2.5"
   },
   "overrides": {

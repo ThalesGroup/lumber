@@ -1,9 +1,11 @@
-import { Enum } from './datamodel';
-import { Class } from './datamodel/Class';
-import { Interface } from './datamodel/Interface';
-import { UMLStructure } from './datamodel/UMLStructure';
+import {
+    Class,
+    Enum,
+    Interface,
+    UMLStructure,
+    umlToDatamodel
+} from 'umltranslator-datamodel';
 import { JavaTranslator } from './JavaTranslator';
-import { umlToDatamodel } from './utils/umltodatamodel';
 
 export class JavaFile {
     public name = '';

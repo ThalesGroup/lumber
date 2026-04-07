@@ -1,5 +1,4 @@
-import { describe, it, expect } from 'vitest';
-import { UMLTranslator } from '../UMLTranslator';
+import { describe, expect, it } from 'vitest';
 import {
     Association,
     Attribute,
@@ -12,6 +11,7 @@ import {
     UMLStructure,
     VisibleType
 } from '../datamodel';
+import { UMLTranslator } from '../generator/UMLTranslator';
 
 describe('UML Translator', () => {
     it('should translate a datamodel', () => {

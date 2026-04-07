@@ -69,7 +69,7 @@ import {
     Parameter,
     UMLStructure,
     VisibleType
-} from '../datamodel';
+} from 'umltranslator-datamodel';
 
 type ClassMembers = {
     methods: Map<string, Method>;

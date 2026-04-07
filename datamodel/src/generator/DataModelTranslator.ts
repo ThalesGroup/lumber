@@ -1,7 +1,7 @@
-import { Class } from './Class';
-import { Enum } from './Enum';
-import { Interface } from './Interface';
-import { UMLStructure } from './UMLStructure';
+import { Class } from '../datamodel/Class';
+import { Enum } from '../datamodel/Enum';
+import { Interface } from '../datamodel/Interface';
+import { UMLStructure } from '../datamodel/UMLStructure';
 
 export interface DataModelTranslator {
     translateInterface(interfaceModel: Interface): string;

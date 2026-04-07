@@ -1,9 +1,8 @@
 import { lstat, opendir, readFile } from 'fs/promises';
 import { parse } from 'java-parser';
 import { join } from 'path';
+import { UMLStructure, UMLTranslator } from 'umltranslator-datamodel';
 import * as vscode from 'vscode';
-import { UMLTranslator } from '../UMLTranslator';
-import { UMLStructure } from '../datamodel';
 import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
 
 export class JavaToUmlTranslator {

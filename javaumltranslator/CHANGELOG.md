@@ -13,6 +13,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Changed
 
 - showOpenDialog's title for folder selection in Java To UML
+- Removed the Datamodel and associated files (UMLTranslator & umltodatamodel) to use it as a dependency instead
+
+### Fixed
+
+- Parse extends & implements association correctly even when in separate packages
+
+    Still need some work however on the UML to Java part to support packages
 
 ## [1.1.0]
 

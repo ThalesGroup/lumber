@@ -1,17 +1,17 @@
 import {
-    EnumProperty,
-    Enum,
-    DataModelTranslator,
     Association,
     Attribute,
     Class,
+    DataModelTranslator,
+    Enum,
+    EnumProperty,
     Interface,
     Method,
+    MultiplicityType,
     Parameter,
     UMLStructure,
-    VISIBLE_TYPES_TO_UML,
-    MultiplicityType
-} from './datamodel';
+    VISIBLE_TYPES_TO_UML
+} from '../datamodel';
 
 export class UMLTranslator implements DataModelTranslator {
     translateParameters(params: Parameter[]): string {

@@ -1,8 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
 import * as assert from 'assert';
+import { describe, expect, it, vi } from 'vitest';
 
-import { umlToDatamodel } from '../utils/umltodatamodel';
 import { MultiplicityType, VisibleType } from '../datamodel';
+import { umlToDatamodel } from '../parser/umltodatamodel';
 
 const UML_DIAGRAMS = [
     `class test01

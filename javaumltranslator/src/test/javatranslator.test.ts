@@ -1,11 +1,13 @@
 import * as assert from 'assert';
+import {
+    Attribute,
+    Class,
+    Interface,
+    Method,
+    Parameter,
+    VisibleType
+} from 'umltranslator-datamodel';
 import { describe, it } from 'vitest';
-import { Attribute } from '../datamodel/Attribute';
-import { Class } from '../datamodel/Class';
-import { Interface } from '../datamodel/Interface';
-import { Method } from '../datamodel/Method';
-import { Parameter } from '../datamodel/Parameter';
-import { VisibleType } from '../datamodel/UMLType';
 import { JavaTranslator } from '../JavaTranslator';
 
 const TRANSLATOR = new JavaTranslator();

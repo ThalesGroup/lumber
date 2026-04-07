@@ -5,7 +5,7 @@ import { lstat, opendir, readFile, writeFile } from 'fs/promises';
 import { parse } from 'java-parser';
 import { join } from 'path';
 import { exit } from 'process';
-import { UMLTranslator } from './UMLTranslator';
+import { UMLTranslator } from 'umltranslator-datamodel';
 import { JavaToDatamodelVisitor } from './utils/JavaToDatamodelVisitor';
 
 program
