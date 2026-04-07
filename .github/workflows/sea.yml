@@ -1,4 +1,4 @@
-name: "Build SEA"
+name: 'Build SEA'
 
 on:
   workflow_call:
@@ -15,7 +15,6 @@ on:
         type: string
         required: true
 
-
 jobs:
   sea:
     strategy:
@@ -23,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: ${{ inputs.projectFolder }} 
+        working-directory: ${{ inputs.projectFolder }}
     steps:
       - name: Checkout
         id: checkout
@@ -35,12 +34,20 @@ jobs:
         with:
           node-version: 20.15.0
 
+      - name: Install Datamodel's dependencies
+        run: npm install
+        working-directory: ./datamodel
+
+      - name: Build Datamodel project
+        run: npm run build
+        working-directory: ./datamodel
+
       - name: Install dependencies
         run: npm install
 
       - name: Build
         run: npm run build
-        
+
       - name: Test Project
         run: npm test
 

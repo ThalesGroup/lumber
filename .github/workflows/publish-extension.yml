@@ -30,9 +30,17 @@ jobs:
         with:
           node-version: 20.15.0
 
+      - name: Install Datamodel's dependencies
+        run: npm install
+        working-directory: ./datamodel
+
+      - name: Build Datamodel project
+        run: npm run build
+        working-directory: ./datamodel
+
       - name: Install dependencies
         run: npm install
-        
+
       - name: Test Project
         run: npm test
 
