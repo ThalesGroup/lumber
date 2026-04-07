@@ -22,9 +22,10 @@ See each project for usage
 
 ## Roadmap
 
-- Publish extensions to the marketplace
-- Extract the datamodel and a Translator interface and put them in a specific project that all language project will use
-- Create a CLI that provides every possible combination (java <-> protobuf, plantuml <-> java, etc.)
+- [IDLE] Publish extensions to the marketplace
+- [IN PROGRESS] Extract the datamodel and a Translator interface and put them in a specific project that all language project will use
+- [IDLE] Create a CLI that provides every possible combination (java <-> protobuf, plantuml <-> java, etc.)
+- [IDLE] Create exemple data for testing purpose
 
 ## Contributing
 
