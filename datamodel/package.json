@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "Datamodel used for reverse code source & source code generation in multiple languages",
     "main": "dist/index.js",
-    "type": "module",
     "scripts": {
         "build": "esbuild src/index.ts --bundle --minify --outfile=dist/index.js --platform=node --target=es2020",
         "postbuild": "npm run types",
