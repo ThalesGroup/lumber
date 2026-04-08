@@ -19,9 +19,11 @@ This project is distributed in two format :
 - A Visual Studio Code extension
 - As two command executable in a CLI
 
-If you just want to get the extension on your VSC you can download [the latest package](https://github.com/ThalesGroup/lumber/javaumltranslator/-/jobs/artifacts/main/download?job=package).
+~~If you just want to get the extension on your VSC you can download [the latest package](https://github.com/ThalesGroup/lumber/javaumltranslator/-/jobs/artifacts/main/download?job=package).~~
 
-**Check out the [latest release](https://github.com/ThalesGroup/lumber/javaumltranslator/-/releases/permalink/latest) for more informations on the latest changes !**
+~~**Check out the [latest release](https://github.com/ThalesGroup/lumber/javaumltranslator/-/releases/permalink/latest) for more informations on the latest changes !**~~
+
+> TODO: rewrite this for the first release
 
 Then install it via the extension panel :
 
@@ -31,15 +33,7 @@ Then install it via the extension panel :
 
 ### \[Build\]
 
-To install the dependencies of this project, you must first build the following dependency: [**datamodel project**](../datamodel/)
-
-To do that, execute the following (assuming your CLI is located at the root of the javaumltranslator project):
-
-```sh
-cd ../datamodel
-npm install # Install Datamodel's dependencies
-npm run build # Build Datamodel project
-```
+To install the dependencies of this project, you must first build the following dependency: [**datamodel project**](../datamodel/). Follow the instruction in [**the ReadME**](../datamodel/ReadME.md)
 
 Then, go back to this project (`cd ../javaumltranslator`), and build it:
 
@@ -52,10 +46,9 @@ After that you should have a **dist/** folder filled with the project scripts
 
 ### \[RUN\] Start the project
 
-I assume that you have successfully installed all dependencies and build the projet.
+You can start it by selecting the correct launch script on the "Run and Debug" tab of your VSCode editor. Then press **F5** or simply click on the green arrow "Start debugging".
 
-If this doesn't work for you or if you wan't to start the project from the code you can simply clone the repo.
-You can build the project with `npm run build` and start it by pressing `F5` on VSC with the workspace set on the root folder of the project, where the package.json is located.
+It'll launch a separate VSCode window in a **[Extension Development Host]** mode.
 
 ## Usage
 
