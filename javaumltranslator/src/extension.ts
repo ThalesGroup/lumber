@@ -1,8 +1,7 @@
+import { readFileSync } from 'fs';
 import * as vscode from 'vscode';
 import { JavaFile, UmlToJavaTranslator } from './umltojavatranslator';
 import { JavaToUmlTranslator } from './utils/javatoumltranslator';
-import { writeFile } from 'fs/promises';
-import { readFileSync } from 'fs';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('javaumltranslator is now active!');
@@ -38,15 +37,19 @@ export function activate(context: vscode.ExtensionContext) {
             let javaFile: JavaFile;
             if (destinationFolder && destinationFolder.length) {
                 const folder = destinationFolder[0];
-                const wsPath = folder.fsPath;
                 for (javaFile of javaFiles) {
-                    const filePath = vscode.Uri.file(
-                        wsPath + '/' + javaFile.name + '.java'
+                    const dirPath = vscode.Uri.joinPath(
+                        folder,
+                        ...javaFile.packageName.split('.')
                     );
-                    console.log('generate : ' + filePath);
-                    writeFile(
-                        wsPath + '/' + javaFile.name + '.java',
-                        javaFile.body
+                    if (javaFile.packageName != '') {
+                        console.log('Creating dir: ' + dirPath);
+
+                        await vscode.workspace.fs.createDirectory(dirPath);
+                    }
+                    vscode.workspace.fs.writeFile(
+                        vscode.Uri.joinPath(dirPath, javaFile.name + '.java'),
+                        Buffer.from(javaFile.body, 'utf8')
                     );
                 }
 

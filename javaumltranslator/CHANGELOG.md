@@ -18,8 +18,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Fixed
 
 - Parse extends & implements association correctly even when in separate packages
-
-    Still need some work however on the UML to Java part to support packages
+- Source code generation: Fixed package were not used, now files are created in the dir they belong to based on their package
 
 ## [1.1.0]
 
