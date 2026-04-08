@@ -3,7 +3,7 @@ import { Enum } from '../datamodel/Enum';
 import { Interface } from '../datamodel/Interface';
 import { UMLStructure } from '../datamodel/UMLStructure';
 
-export interface DataModelTranslator {
+export interface IDataModelTranslator {
     translateInterface(interfaceModel: Interface): string;
     translateInterfaces(interfaces: Map<string, Interface>): string;
 

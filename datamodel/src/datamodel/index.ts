@@ -1,4 +1,3 @@
-export * from '../generator/DataModelTranslator';
 export * from './Association';
 export * from './Attribute';
 export * from './Class';
