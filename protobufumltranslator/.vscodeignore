@@ -1,6 +1,9 @@
 # Ignore
 **
+../**
 
 # Keep
 !LICENSE.md
+!CHANGELOG.md
+!README.md
 !dist/main.js
