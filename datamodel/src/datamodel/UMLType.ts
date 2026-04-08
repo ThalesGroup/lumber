@@ -15,16 +15,18 @@ export class UMLType {
 
     public static BODY = /(?:{(?:(?:{[^}]+})|[^}])+})/;
 
+    public static ENTITY_NAME = /[a-zA-Z0-9_.]+/;
+
     public static INTERFACE = new RegExp(
-        `interface\\s+(\\w+)\\s*${UMLType.BODY.source}?`,
+        `interface\\s+(${UMLType.ENTITY_NAME.source})\\s*${UMLType.BODY.source}?`,
         'g'
     );
     public static CLASS = new RegExp(
-        `class\\s+(\\w+)\\s*(extends\\s+\\w+\\s*)?(implements\\s+[\\w,\\s]+\\s*)?${UMLType.BODY.source}?`,
+        `class\\s+(${UMLType.ENTITY_NAME.source})\\s*(extends\\s+${UMLType.ENTITY_NAME.source}\\s*)?(implements\\s+[\\w,\\s]+\\s*)?${UMLType.BODY.source}?`,
         'g'
     );
     public static ENUM = new RegExp(
-        `enum\\s+(\\w+)\\s*${UMLType.BODY.source}?`,
+        `enum\\s+(${UMLType.ENTITY_NAME.source})\\s*${UMLType.BODY.source}?`,
         'g'
     );
 

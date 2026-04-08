@@ -21,6 +21,6 @@ enum Enum1 {
 enum Enum2
 
 Class1 "1" *--> "1" Class2 : extends
-Class2 "1" *--> "1" Class3
+Class2  *--> "1" Class3
 @enduml"
 `;

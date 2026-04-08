@@ -117,7 +117,7 @@ class testExtd extends testClass`
 
             const classMdl = umlStructure.classes.get('testExtd');
             assert.ok(classMdl);
-            assert.equal(classMdl.extends, 'testClass');
+            assert.equal(classMdl?.extends, 'testClass');
         });
 
         it('should translate a class with an implement', () => {
@@ -130,7 +130,7 @@ class testExtd implements testInterface`
 
             const classMdl = umlStructure.classes.get('testExtd');
             assert.ok(classMdl);
-            assert.deepEqual(classMdl.implements, ['testInterface']);
+            assert.deepEqual(classMdl?.implements, ['testInterface']);
         });
 
         it('should translate a class with an extend and 3 implements', () => {
@@ -146,8 +146,8 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
 
             const classMdl = umlStructure.classes.get('testExtd');
             assert.ok(classMdl);
-            assert.equal(classMdl.extends, 'testClass');
-            assert.deepEqual(classMdl.implements, [
+            assert.equal(classMdl?.extends, 'testClass');
+            assert.deepEqual(classMdl?.implements, [
                 'testInterface',
                 'testInterface2',
                 'testInterface3'
@@ -287,6 +287,22 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
                 );
             });
         });
+
+        it('should translate a class with fullname (package + class name)', () => {
+            const umlStr = 'class com.company.domain.MyClass';
+
+            const umlStructure = umlToDatamodel(umlStr);
+
+            // FQCN (fully qualified class name)
+            assert.equal(umlStructure.classes.size, 1);
+            const cls = umlStructure.classes.get('com.company.domain.MyClass');
+            assert.ok(cls, 'full class name should exist as single key');
+            assert.equal(
+                cls?.name,
+                'com.company.domain.MyClass',
+                'parsed class name should be fullname'
+            );
+        });
     });
 
     describe('Interface', () => {
@@ -370,6 +386,27 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
                 }
             });
         });
+
+        it('should translate an interface with fullname (package + class name)', () => {
+            const umlStr = 'interface com.company.project.MyInterface';
+
+            const umlStructure = umlToDatamodel(umlStr);
+
+            assert.equal(
+                umlStructure.interfaces.size,
+                1,
+                'should have 1 interface'
+            );
+            const parsed = umlStructure.interfaces.get(
+                'com.company.project.MyInterface'
+            );
+            assert.ok(parsed, 'interface should be found with full name');
+            assert.equal(
+                parsed?.name,
+                'com.company.project.MyInterface',
+                'name of the parsed interface should be fullname'
+            );
+        });
     });
 
     describe('Enums', () => {
@@ -436,6 +473,17 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
             expect(parameter).toBeDefined();
             expect(parameter?.name).toEqual('PROP_3');
             expect(parameter?.value).toEqual('2');
+        });
+
+        it('should translate an enum with fullname (package + class name)', () => {
+            const umlStr = 'enum com.some.pkg.MyEnum';
+
+            const umlStructure = umlToDatamodel(umlStr);
+
+            expect(umlStructure.enums.size).toEqual(1);
+            const parsed = umlStructure.enums.get('com.some.pkg.MyEnum');
+            expect(parsed).toBeDefined();
+            expect(parsed?.name).toEqual('com.some.pkg.MyEnum');
         });
     });
 

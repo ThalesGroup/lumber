@@ -79,7 +79,7 @@ describe('UML Translator', () => {
                 'Class3',
                 '<--',
                 MultiplicityType.One,
-                MultiplicityType.One
+                MultiplicityType.NotSpecified
             )
         );
 
