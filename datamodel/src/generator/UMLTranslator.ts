@@ -1,8 +1,8 @@
+import { IDataModelTranslator } from '.';
 import {
     Association,
     Attribute,
     Class,
-    DataModelTranslator,
     Enum,
     EnumProperty,
     Interface,
@@ -13,7 +13,7 @@ import {
     VISIBLE_TYPES_TO_UML
 } from '../datamodel';
 
-export class UMLTranslator implements DataModelTranslator {
+export class UMLTranslator implements IDataModelTranslator {
     translateParameters(params: Parameter[]): string {
         return params.map((p) => p.name + ' : ' + p.type).join(', ');
     }
