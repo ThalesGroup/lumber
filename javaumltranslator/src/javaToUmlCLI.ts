@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import { lstat, opendir, readdir, readFile, writeFile } from 'fs/promises';
+import { lstat, opendir, readFile, writeFile } from 'fs/promises';
 import { parse } from 'java-parser';
 import { join } from 'path';
 import { exit } from 'process';
-import { UMLTranslator } from './UMLTranslator';
+import { UMLTranslator } from 'umltranslator-datamodel';
 import { JavaToDatamodelVisitor } from './utils/JavaToDatamodelVisitor';
 
 program
@@ -55,7 +55,7 @@ program
 
         console.log('Starting parsing files...');
         for (const file of files) {
-            myVisitor.clearPackage();
+            myVisitor.clear();
             console.log(`- Parsing : ${file}...`);
             const cst = parse(await readFile(file, { encoding: 'utf-8' }));
             myVisitor.visit(cst);

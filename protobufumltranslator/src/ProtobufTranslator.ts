@@ -1,12 +1,12 @@
 import {
     Attribute,
     Class,
-    DataModelTranslator,
     Enum,
+    IDataModelTranslator,
     Interface,
     UMLStructure,
     UMLType
-} from './datamodel';
+} from 'umltranslator-datamodel';
 
 const NATIVES_TYPES = [
     'double',
@@ -26,7 +26,7 @@ const NATIVES_TYPES = [
     'bytes'
 ];
 
-export class ProtobufTranslator implements DataModelTranslator {
+export class ProtobufTranslator implements IDataModelTranslator {
     public translatedTypes: string[];
     public untranslatedTypes: string[];
 

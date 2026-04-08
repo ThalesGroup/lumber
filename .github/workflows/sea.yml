@@ -1,4 +1,4 @@
-name: "Build SEA"
+name: 'Build SEA'
 
 on:
   workflow_call:
@@ -15,7 +15,6 @@ on:
         type: string
         required: true
 
-
 jobs:
   sea:
     strategy:
@@ -23,24 +22,32 @@ jobs:
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: ${{ inputs.projectFolder }} 
+        working-directory: ${{ inputs.projectFolder }}
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         id: setup-node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.15.0
+          node-version: 24.x
+
+      - name: Install Datamodel's dependencies
+        run: npm install
+        working-directory: ./datamodel
+
+      - name: Build Datamodel project
+        run: npm run build
+        working-directory: ./datamodel
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
         run: npm run build
-        
+
       - name: Test Project
         run: npm test
 
@@ -70,7 +77,7 @@ jobs:
           sea-config-path: sea-config.json
           node-path: ${{ steps.find-node.outputs.node }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: ${{ inputs.commandName }}-${{ matrix.os }}-sea
           path: build/

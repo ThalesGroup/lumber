@@ -1,4 +1,0 @@
-{
-    "main": "./javaumltranslator/dist/cli/umlToJavaCLI.js",
-    "output": "./javaumltranslator/umlToJava.blob"
-}

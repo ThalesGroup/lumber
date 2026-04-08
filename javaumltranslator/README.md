@@ -2,9 +2,7 @@
 
 ## Intro
 
-This project is an Visual Studio Code (VSC) extension that translate an UML Class Diagram into a Java source code.
-
-In the futur you will be able to extract a diagram from java files.
+This project is an Visual Studio Code (VSC) extension that translate an UML Class Diagram into a Java source code or translate Java source code into an UML Class Diagram.
 
 If you're not familiar with plantuml I suggest you to browse [their website](https://plantuml.com/fr/)
 
@@ -18,8 +16,8 @@ Works on every version of VSC until 1.74.0, to see if your version is higher, yo
 
 This project is distributed in two format :
 
--   A Visual Studio Code extension
--   As a command executable in a CLI
+- A Visual Studio Code extension
+- As two command executable in a CLI
 
 If you just want to get the extension on your VSC you can download [the latest package](https://github.com/ThalesGroup/lumber/javaumltranslator/-/jobs/artifacts/main/download?job=package).
 
@@ -31,9 +29,19 @@ Then install it via the extension panel :
 
 ## Installation from source code
 
-### \[Build\] With the digitalFactory
+### \[Build\]
 
-Hopefully for you, this project works with the registry provided by the digitalFactory, just run these commands :
+To install the dependencies of this project, you must first build the following dependency: [**datamodel project**](../datamodel/)
+
+To do that, execute the following (assuming your CLI is located at the root of the javaumltranslator project):
+
+```sh
+cd ../datamodel
+npm install # Install Datamodel's dependencies
+npm run build # Build Datamodel project
+```
+
+Then, go back to this project (`cd ../javaumltranslator`), and build it:
 
 ```sh
 npm install # Install dependencies

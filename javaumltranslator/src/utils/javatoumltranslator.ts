@@ -1,10 +1,9 @@
-import { parse } from 'java-parser';
-import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
-import { UMLTranslator } from '../UMLTranslator';
-import { UMLStructure } from '../datamodel';
 import { lstat, opendir, readFile } from 'fs/promises';
+import { parse } from 'java-parser';
 import { join } from 'path';
+import { UMLStructure, UMLTranslator } from 'umltranslator-datamodel';
 import * as vscode from 'vscode';
+import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
 
 export class JavaToUmlTranslator {
     public async translate(
@@ -74,7 +73,7 @@ export class JavaToUmlTranslator {
 
                 progress.report(reportData);
             }
-            myVisitor.clearPackage();
+            myVisitor.clear();
             const cst = parse(await readFile(fileUri, { encoding: 'utf-8' }));
             myVisitor.visit(cst);
         }

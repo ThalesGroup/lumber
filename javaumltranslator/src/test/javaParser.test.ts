@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { parse } from 'java-parser';
-import { Parameter } from '../datamodel';
+import { Parameter } from 'umltranslator-datamodel';
+import { describe, expect, it } from 'vitest';
 import { JavaToDatamodelVisitor } from '../utils/JavaToDatamodelVisitor';
 
 describe('Parser', () => {

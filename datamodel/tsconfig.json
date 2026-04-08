@@ -1,13 +1,17 @@
 {
     "compilerOptions": {
         "target": "ES2020",
-        "module": "commonJS",
-        "outDir": "dist/cli/",
+        "module": "es2020",
         "rootDir": "src/",
+        "outDir": "dist/",
+        "declaration": true,
+        "emitDeclarationOnly": false,
+        "declarationDir": "dist",
         "lib": ["ES2015", "ES2020"],
         "sourceMap": true,
         "strict": true /* enable all strict type-checking options */,
-        "types": ["node"]
+        "types": ["node"],
+        "moduleResolution": "bundler"
 
         /* Additional Checks */
         // "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */

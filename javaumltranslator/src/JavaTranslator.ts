@@ -1,11 +1,13 @@
-import { VisibleType } from './datamodel';
-import { Class } from './datamodel/Class';
-import { DataModelTranslator } from './datamodel/DataModelTranslator';
-import { Enum } from './datamodel/Enum';
-import { Interface } from './datamodel/Interface';
-import { Method } from './datamodel/Method';
-import { Parameter } from './datamodel/Parameter';
-import { UMLStructure } from './datamodel/UMLStructure';
+import {
+    Class,
+    DataModelTranslator,
+    Enum,
+    Interface,
+    Method,
+    Parameter,
+    UMLStructure,
+    VisibleType
+} from 'umltranslator-datamodel';
 
 export class JavaTranslator implements DataModelTranslator {
     addSpaceIfNotNull(vis: VisibleType): string {

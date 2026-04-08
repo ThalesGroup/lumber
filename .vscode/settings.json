@@ -1,0 +1,8 @@
+{
+    "eslint.workingDirectories": [
+        "javaumltranslator",
+        "protobufumltranslator",
+        "datamodel"
+    ],
+    "prettier.prettierPath": "./node_modules/prettier"
+}

@@ -2,33 +2,71 @@ name: CI
 
 on:
   push:
-  workflow_dispatch: 
-    
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 24.x
+
 jobs:
-  build:
-    name: Build & Test
+  build-test:
+    name: Build & Test (${{ matrix.dir }} on ${{ matrix.os }})
     strategy:
-      matrix: { dir: ['./javaumltranslator', './protobufumltranslator'], os: [ubuntu-latest, windows-latest] }
+      matrix:
+        dir: [javaumltranslator, protobufumltranslator]
+        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: ${{ matrix.dir }}
+        working-directory: ./${{ matrix.dir }}
     steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        id: setup-node
-        uses: actions/setup-node@v4
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.15.0
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Datamodel dependencies
+        run: npm install
+        working-directory: ./datamodel
+
+      - name: Build Datamodel project
+        run: npm run build
+        working-directory: ./datamodel
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
         run: npm run --if-present build
-        
-      - name: Test Project
+
+      - name: Test
         run: npm test
+
+  lint-and-format:
+    name: Lint & Format (${{ matrix.dir }})
+    strategy:
+      matrix:
+        dir: [javaumltranslator, protobufumltranslator]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Lint check
+        working-directory: ./${{ matrix.dir }}
+        run: npm run lint:check
+
+      - name: Format check
+        working-directory: ./${{ matrix.dir }}
+        run: npm run format:check
