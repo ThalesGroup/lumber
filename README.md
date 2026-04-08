@@ -22,8 +22,14 @@ See each project for usage
 
 ## Roadmap
 
+This project started of several tools that were completly distinct from each others. Now, it's starting to look like a project **composed** of multiple components that each has its own purpose (parse/generate in Java, Protobuf, etc.).
+
+Each language should have its own vscode extension for simplicity, but should also be available with a CLI for exemple.
+
+In order to fullfill this, I created the following Roadmap that help visualize how far we are from this goal:
+
 - [***DONE***] ~~Extract the datamodel and a Translator interface and put them in a specific project that all language project will use~~
-- [**IDLE**] Publish extensions to the marketplace
+- [**IDLE**] Publish extensions to the VSC marketplace
 - [**IDLE**] Create a CLI that provides every possible combination (java <-> protobuf, plantuml <-> java, etc.)
 - [**IDLE**] Create exemple data for testing purpose (E2E testing)
 - [**IDLE**] Create some walkthrough guide on how to use the project
