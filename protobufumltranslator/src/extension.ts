@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 
 import { readFileSync } from 'fs';
+import { umlToDatamodel } from 'umltranslator-datamodel';
 import { ProtobufTranslator } from './ProtobufTranslator';
-import { umlToDatamodel } from './utils/umltodatamodel';
 
 const TRANSLATOR = new ProtobufTranslator();
 

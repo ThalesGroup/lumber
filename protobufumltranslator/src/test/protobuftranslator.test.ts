@@ -1,4 +1,3 @@
-import { ProtobufTranslator } from '../ProtobufTranslator';
 import {
     Association,
     Attribute,
@@ -10,7 +9,8 @@ import {
     MultiplicityType,
     Parameter,
     UMLStructure
-} from '../datamodel';
+} from 'umltranslator-datamodel';
+import { ProtobufTranslator } from '../ProtobufTranslator';
 
 const dataModel = new UMLStructure();
 const class1 = new Class('Class1', 'ExtendClass');
