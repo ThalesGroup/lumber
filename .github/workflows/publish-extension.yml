@@ -22,13 +22,13 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         id: setup-node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.15.0
+          node-version: 24.x
 
       - name: Install Datamodel's dependencies
         run: npm install
@@ -47,7 +47,7 @@ jobs:
       - name: Generate Extension VSIX
         run: npm run package
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: ${{ inputs.project }}.vsix
           path: ${{ inputs.project }}/${{ inputs.project }}.vsix

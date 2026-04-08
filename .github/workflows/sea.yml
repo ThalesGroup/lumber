@@ -26,13 +26,13 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         id: setup-node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.15.0
+          node-version: 24.x
 
       - name: Install Datamodel's dependencies
         run: npm install
@@ -77,7 +77,7 @@ jobs:
           sea-config-path: sea-config.json
           node-path: ${{ steps.find-node.outputs.node }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: ${{ inputs.commandName }}-${{ matrix.os }}-sea
           path: build/
