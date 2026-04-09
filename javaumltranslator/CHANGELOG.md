@@ -6,6 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-04-09
+
 ### Added
 
 - Improve README with images
@@ -17,7 +19,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Fixed
 
-- Parse extends & implements association correctly even when in separate packages
+- Parse extends & implements association correctly even when referencing foreign classes or interfaces
 - Source code generation: Fixed package were not used, now files are created in the dir they belong to based on their package
 
 ## [1.1.0]

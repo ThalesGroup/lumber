@@ -1,6 +1,6 @@
 {
     "name": "umltranslator-datamodel",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "description": "Datamodel used for reverse code source & source code generation in multiple languages",
     "main": "dist/index.js",
     "scripts": {

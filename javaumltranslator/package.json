@@ -2,7 +2,7 @@
   "name": "javaumltranslator",
   "displayName": "Java / UML Translator",
   "description": "Use to generate and analyse JAVA code structure.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "bin": {
     "umltojava": "./dist/cli/umlToJavaCLI.js",
     "javatouml": "./dist/cli/javaToUmlCLI.js"
@@ -17,7 +17,7 @@
   "categories": [
     "Other"
   ],
-  "publisher": "Valentin",
+  "publisher": "lumber",
   "main": "./dist/vscode/main.js",
   "contributes": {
     "commands": [
