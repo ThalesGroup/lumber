@@ -18,7 +18,7 @@ Depending on what you are making, it can be a good idea to include screenshots o
 
 This project is dependent of the [**datamodel project**](../datamodel/), you must follow the instruction on this project **before** continuing.
 
-To install the ProtobufUmlTranslator project, you must execute the following commands:
+To install the ProtobufUmlTranslator project, you must execute the following command:
 
 ```sh
 npm install
