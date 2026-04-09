@@ -8,6 +8,14 @@ Depending on what you are making, it can be a good idea to include screenshots o
 
 ## Installation
 
+### Extension installation
+
+**Check out the [latest release](https://github.com/ThalesGroup/lumber/releases/latest) to download and install the latest version of this extension !**
+
+> To install a VSIX, just open the extension tab on Visual Studio Code, then click on the three dot icon and select "Install from VSIX..."
+
+### Development installation
+
 This project is dependent of the [**datamodel project**](../datamodel/), you must follow the instruction on this project **before** continuing.
 
 To install the ProtobufUmlTranslator project, you must execute the following commands:
