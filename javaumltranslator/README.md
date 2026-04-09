@@ -19,11 +19,7 @@ This project is distributed in two format :
 - A Visual Studio Code extension
 - As two command executable in a CLI
 
-~~If you just want to get the extension on your VSC you can download [the latest package](https://github.com/ThalesGroup/lumber/javaumltranslator/-/jobs/artifacts/main/download?job=package).~~
-
-~~**Check out the [latest release](https://github.com/ThalesGroup/lumber/javaumltranslator/-/releases/permalink/latest) for more informations on the latest changes !**~~
-
-> TODO: rewrite this for the first release
+**Check out the [latest release](https://github.com/ThalesGroup/lumber/releases/latest) to install the latest version !**
 
 Then install it via the extension panel :
 
