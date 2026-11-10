@@ -114,7 +114,7 @@ describe('Templates', () => {
             const result = translator.translateInterface(services);
 
             expect(result).toEqual(servicesTranslated);
-            expect(console.warn).toBeCalledTimes(2);
+            expect(console.warn).toHaveBeenCalledTimes(2);
         });
 
         it('should translate an events interface', () => {
