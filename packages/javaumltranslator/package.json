@@ -81,11 +81,11 @@
     "braces": ">=3.0.3",
     "commander": "^12.1.0",
     "java-parser": "^0.3.2",
+    "lodash": "^4.18.1",
     "semver": ">=7.5.2",
     "word-wrap": ">=1.2.5"
   },
   "overrides": {
-    "glob": ">=14.0.4",
     "minimatch": ">11.0.0"
   }
 }
