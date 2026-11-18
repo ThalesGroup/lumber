@@ -29,12 +29,12 @@
     "homepage": "https://github.com/ThalesGroup/lumber#readme",
     "devDependencies": {
         "@types/node": "^25.5.2",
-        "@vitest/coverage-v8": "^4.1.2",
+        "@vitest/coverage-v8": "^5.1.1",
         "dts-bundle-generator": "^9.5.1",
         "esbuild": "^0.28.0",
         "eslint": "^10.1.0",
         "prettier": "^3.8.1",
         "typescript": "^6.0.2",
-        "vitest": "^4.1.2"
+        "vitest": "^5.1.1"
     }
 }

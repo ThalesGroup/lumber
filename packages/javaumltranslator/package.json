@@ -54,7 +54,7 @@
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "build": "esbuild ./src/javaToUmlCLI.ts ./src/umlToJavaCLI.ts --bundle --outdir=dist/cli/ --format=cjs --platform=node",
     "watch-cli": "npm run compile -- --sourcemap --watch",
-    "package": "vsce package --baseImagesUrl \"https://github.com/ThalesGroup/lumber/raw/HEAD/javaumltranslator/\" --ignoreFile .vscodeignore -o javaumltranslator.vsix",
+    "package": "vsce package --no-dependencies --baseImagesUrl \"https://github.com/ThalesGroup/lumber/raw/HEAD/javaumltranslator/\" --ignoreFile .vscodeignore -o javaumltranslator.vsix",
     "lint:check": "eslint .",
     "lint:write": "eslint . --fix",
     "format:write": "prettier --write .",
@@ -64,8 +64,8 @@
   "devDependencies": {
     "@types/node": "^22.9.1",
     "@types/vscode": "^1.54.0",
-    "@vitest/coverage-v8": "^5.1.0",
-    "@vscode/vsce": "^3.7.1",
+    "@vitest/coverage-v8": "^5.1.1",
+    "@vscode/vsce": "^4.1.1",
     "braces": ">=3.0.3",
     "esbuild": "^0.28.2",
     "eslint": "^9.39.5",
@@ -73,15 +73,15 @@
     "prettier": "^3.8.1",
     "semver": ">=7.5.2",
     "typescript": "^4.7.4",
-    "vitest": "^5.1.0",
+    "vitest": "^5.1.1",
     "word-wrap": ">=1.2.5"
   },
   "dependencies": {
+    "@lumber/datamodel": "1.2.0",
     "braces": ">=3.0.3",
     "commander": "^12.1.0",
     "java-parser": "^0.3.2",
     "semver": ">=7.5.2",
-    "@lumber/datamodel": "1.2.0",
     "word-wrap": ">=1.2.5"
   },
   "overrides": {
