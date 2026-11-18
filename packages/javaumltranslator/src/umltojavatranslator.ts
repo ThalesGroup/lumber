@@ -4,7 +4,7 @@ import {
     Interface,
     UMLStructure,
     umlToDatamodel
-} from 'umltranslator-datamodel';
+} from '@lumber/datamodel';
 import { JavaTranslator } from './JavaTranslator';
 
 export class JavaFile {

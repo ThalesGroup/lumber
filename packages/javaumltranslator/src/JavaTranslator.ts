@@ -7,7 +7,7 @@ import {
     Parameter,
     UMLStructure,
     VisibleType
-} from 'umltranslator-datamodel';
+} from '@lumber/datamodel';
 
 export class JavaTranslator implements DataModelTranslator {
     addSpaceIfNotNull(vis: VisibleType): string {

@@ -6,7 +6,7 @@ import {
     Interface,
     UMLStructure,
     UMLType
-} from 'umltranslator-datamodel';
+} from '@lumber/datamodel';
 
 const NATIVES_TYPES = [
     'double',

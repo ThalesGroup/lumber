@@ -9,7 +9,7 @@ import {
     MultiplicityType,
     Parameter,
     UMLStructure
-} from 'umltranslator-datamodel';
+} from '@lumber/datamodel';
 import { ProtobufTranslator } from '../ProtobufTranslator';
 
 const dataModel = new UMLStructure();

@@ -1,9 +1,15 @@
 {
-    "private": true,
+    "name": "lumber",
+    "workspaces": [
+        "packages/datamodel",
+        "packages/javaumltranslator",
+        "packages/protobufumltranslator",
+        "packages/test"
+    ],
     "devDependencies": {
-        "eslint": "^9.39.5",
+        "eslint": "^10.15.0",
         "eslint-config-prettier": "^10.1.8",
-        "prettier": "^3.8.1",
-        "typescript-eslint": "^8.36.0"
+        "prettier": "^3.10.1",
+        "typescript-eslint": "^8.73.0"
     }
 }

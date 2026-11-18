@@ -6,15 +6,15 @@
         },
         {
             "name": "datamodel",
-            "path": "datamodel"
+            "path": "packages/datamodel"
         },
         {
             "name": "protobufumltranslator",
-            "path": "protobufumltranslator"
+            "path": "packages/protobufumltranslator"
         },
         {
             "name": "javaumltranslator",
-            "path": "javaumltranslator"
+            "path": "packages/javaumltranslator"
         }
     ],
     "settings": {

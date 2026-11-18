@@ -6,7 +6,7 @@ import {
     Method,
     Parameter,
     VisibleType
-} from 'umltranslator-datamodel';
+} from '@lumber/datamodel';
 import { describe, it } from 'vitest';
 import { JavaTranslator } from '../JavaTranslator';
 

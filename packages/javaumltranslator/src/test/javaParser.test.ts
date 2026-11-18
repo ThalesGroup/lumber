@@ -1,5 +1,5 @@
 import { parse } from 'java-parser';
-import { Parameter } from 'umltranslator-datamodel';
+import { Parameter } from '@lumber/datamodel';
 import { describe, expect, it } from 'vitest';
 import { JavaToDatamodelVisitor } from '../utils/JavaToDatamodelVisitor';
 
