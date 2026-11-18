@@ -1,5 +1,5 @@
 {
-    "name": "protobufumltranslator",
+    "name": "@lumber/protobufumltranslator",
     "version": "1.2.0",
     "description": "A VSC extension to translate plantUML into Protobuf",
     "main": "dist/main.js",
@@ -76,18 +76,14 @@
     "devDependencies": {
         "@babel/traverse": ">=7.23.2",
         "@types/jest": "^29.5.14",
-        "@types/node": "^18.15.10",
         "@types/vscode": "^1.54.0",
-        "@vscode/vsce": "^4.1.1",
+        "@vscode/vsce": "^4.1.0",
         "braces": ">=3.0.3",
         "esbuild": "^0.28.2",
-        "eslint": "^9.39.5",
         "jest": "^30.5.2",
         "nyc": "^18.0.0",
-        "prettier": "^2.8.7",
         "semver": ">=7.5.2",
         "ts-jest": "^29.4.15",
-        "typescript": "^6.0.2",
         "word-wrap": ">=1.2.5"
     },
     "dependencies": {
