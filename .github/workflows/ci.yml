@@ -2,6 +2,7 @@ name: CI
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 env:
@@ -9,15 +10,15 @@ env:
 
 jobs:
   build-test:
-    name: Build & Test (${{ matrix.dir }} on ${{ matrix.os }})
+    name: Build & Test (${{ matrix.project }} on ${{ matrix.os }})
     strategy:
+      fail-fast: false
       matrix:
-        dir: [javaumltranslator, protobufumltranslator]
+        project: [javaumltranslator, protobufumltranslator]
         os: [ubuntu-latest, windows-latest]
+
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./${{ matrix.dir }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -26,31 +27,23 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Datamodel dependencies
-        run: npm install
-        working-directory: ./datamodel
-
-      - name: Build Datamodel project
-        run: npm run build
-        working-directory: ./datamodel
+          cache: npm
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run --if-present build
-
       - name: Test
-        run: npm test
+        run: npm test -w @lumber/${{ matrix.project }}
 
   lint-and-format:
-    name: Lint & Format (${{ matrix.dir }})
+    name: Lint & Format (${{ matrix.project }})
     strategy:
-      matrix:
-        dir: [javaumltranslator, protobufumltranslator]
       fail-fast: false
+      matrix:
+        project: [javaumltranslator, protobufumltranslator]
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -59,14 +52,13 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: npm
 
-      - name: Install root dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Lint check
-        working-directory: ./${{ matrix.dir }}
-        run: npm run lint:check
+        run: npm run lint:check -w @lumber/${{ matrix.project }}
 
       - name: Format check
-        working-directory: ./${{ matrix.dir }}
-        run: npm run format:check
+        run: npm run format:check -w @lumber/${{ matrix.project }}
