@@ -1,0 +1,4 @@
+{
+  "files": [],
+  "references": [{ "path": "packages/datamodel" }, { "path": "packages/javaumltranslator" }, { "path": "packages/protobufumltranslator" }]
+}

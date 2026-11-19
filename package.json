@@ -14,5 +14,11 @@
         "prettier": "^3.9.10",
         "typescript": "^6.0.3",
         "typescript-eslint": "^8.72.2"
+    },
+    "overrides": {
+        "glob": ">=14.0.4",
+        "minimatch": ">11.0.0",
+        "lodash": ">4.17.23",
+        "lodash-es": ">4.17.23"
     }
 }

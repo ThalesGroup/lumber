@@ -1,7 +1,7 @@
 import {
     Class,
-    DataModelTranslator,
     Enum,
+    IDataModelTranslator,
     Interface,
     Method,
     Parameter,
@@ -9,7 +9,7 @@ import {
     VisibleType
 } from '@lumber/datamodel';
 
-export class JavaTranslator implements DataModelTranslator {
+export class JavaTranslator implements IDataModelTranslator {
     addSpaceIfNotNull(vis: VisibleType): string {
         return vis ? vis.toString() + ' ' : '';
     }

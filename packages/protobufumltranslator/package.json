@@ -8,12 +8,13 @@
         "vscode:prepublish": "npm run esbuild-base -- --minify",
         "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/main.js --external:vscode --format=cjs --platform=node",
         "esbuild": "npm run esbuild-base -- --sourcemap",
+        "build": "tsc -b",
         "package": "vsce package --no-dependencies --baseImagesUrl \"https://github.com/ThalesGroup/lumber/raw/HEAD/protobufumltranslator/\" --ignoreFile .vscodeignore -o protobufumltranslator.vsix",
         "lint:check": "eslint .",
         "lint:write": "eslint . --fix",
         "format:write": "prettier --write .",
         "format:check": "prettier --check .",
-        "test": "jest"
+        "test": "npm run build && jest"
     },
     "repository": {
         "type": "git",
@@ -88,9 +89,5 @@
     },
     "dependencies": {
         "@lumber/datamodel": "1.2.0"
-    },
-    "overrides": {
-        "glob": ">=14.0.4",
-        "minimatch": ">11.0.0"
     }
 }

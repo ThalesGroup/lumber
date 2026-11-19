@@ -52,14 +52,15 @@
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/vscode/main.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "build": "esbuild ./src/javaToUmlCLI.ts ./src/umlToJavaCLI.ts --bundle --outdir=dist/cli/ --format=cjs --platform=node",
+    "bundle-cli": "esbuild ./src/javaToUmlCLI.ts ./src/umlToJavaCLI.ts --bundle --outdir=dist/cli/ --format=cjs --platform=node",
+    "build": "tsc -b",
     "watch-cli": "npm run compile -- --sourcemap --watch",
     "package": "vsce package --no-dependencies --baseImagesUrl \"https://github.com/ThalesGroup/lumber/raw/HEAD/javaumltranslator/\" --ignoreFile .vscodeignore -o javaumltranslator.vsix",
     "lint:check": "eslint .",
     "lint:write": "eslint . --fix",
     "format:write": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run --coverage --config vitest.config.ts"
+    "test": "npm run build && vitest run --coverage --config vitest.config.ts"
   },
   "devDependencies": {
     "@types/vscode": "^1.54.0",
@@ -76,12 +77,9 @@
     "@lumber/datamodel": "1.2.0",
     "braces": ">=3.0.3",
     "commander": "^12.1.0",
-    "java-parser": "^0.3.2",
+    "java-parser": "^3.0.1",
     "lodash": "^4.18.1",
     "semver": ">=7.5.2",
     "word-wrap": ">=1.2.5"
-  },
-  "overrides": {
-    "minimatch": ">11.0.0"
   }
 }
