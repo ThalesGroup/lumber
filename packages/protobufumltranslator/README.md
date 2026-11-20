@@ -26,9 +26,9 @@ npm install
 
 To launch the project:
 
--   go on the Run and Debug tab of a Visual Studio Code editor
--   Ensure that the correct launch script is selected
--   Press **F5** or click on the **Start Debugging** button
+- go on the Run and Debug tab of a Visual Studio Code editor
+- Ensure that the correct launch script is selected
+- Press **F5** or click on the **Start Debugging** button
 
 A new Visual Studio Code window will open in a **[Extension Development Host]** mode.
 
