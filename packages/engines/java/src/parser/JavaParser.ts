@@ -1,16 +1,16 @@
 import { lstat, opendir, readFile } from 'fs/promises';
 import { parse } from 'java-parser';
 import { join } from 'path';
-import * as vscode from 'vscode';
 import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
 
-export class JavaToUmlTranslator {
+export class JavaParser {
     public async parse(
         fromUri: string[],
-        progress?: vscode.Progress<{
+        progress?: {
             message?: string | undefined;
             increment?: number | undefined;
-        }>
+            report: (data: { increment: number; message: string }) => void;
+        }
     ) {
         const allFiles = [];
 
@@ -36,8 +36,7 @@ export class JavaToUmlTranslator {
             }
         }
 
-        if (!allFiles.length)
-            vscode.window.showInformationMessage('0 java files found');
+        if (!allFiles.length) throw new Error('0 java files found');
 
         const myVisitor = new JavaToDatamodelVisitor();
 
@@ -49,7 +48,7 @@ export class JavaToUmlTranslator {
                 currentIncrement += incrementValue;
                 const reportData = {
                     increment: 0,
-                    message: vscode.workspace.asRelativePath(fileUri)
+                    message: fileUri
                 };
 
                 if (currentIncrement >= 1) {

@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import {
     Attribute,
     Class,
@@ -6,9 +5,10 @@ import {
     Method,
     Parameter,
     VisibleType
-} from '@lumber/datamodel';
+} from '@lumber/core';
+import { JavaGenerator } from '@lumber/java-engine';
+import * as assert from 'assert';
 import { describe, it } from 'vitest';
-import { JavaGenerator } from '@lumber/java-engine/src/JavaGenerator';
 
 const TRANSLATOR = new JavaGenerator();
 

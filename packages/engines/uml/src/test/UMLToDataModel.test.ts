@@ -1,8 +1,8 @@
 import * as assert from 'assert';
 import { describe, expect, it, vi } from 'vitest';
 
-import { MultiplicityType, VisibleType } from '../datamodel';
-import { umlToDatamodel } from '../parser/umltodatamodel';
+import { MultiplicityType, VisibleType } from '@lumber/core';
+import { UMLParser } from '../parser';
 
 const UML_DIAGRAMS = [
     `class test01
@@ -60,13 +60,13 @@ const UML_DIAGRAMS = [
 describe('UMLToDataModel', () => {
     describe('Class', () => {
         it('should translate 5 classes', () => {
-            const umlStructure = umlToDatamodel(UML_DIAGRAMS[0]);
+            const umlStructure = UMLParser(UML_DIAGRAMS[0]);
 
             assert.equal(umlStructure.classes.size, 5);
         });
 
         it('should translate 1 class with 6 attributes', () => {
-            const umlStructure = umlToDatamodel(UML_DIAGRAMS[1]);
+            const umlStructure = UMLParser(UML_DIAGRAMS[1]);
 
             assert.equal(umlStructure.classes.size, 1);
             assert.equal(
@@ -108,7 +108,7 @@ describe('UMLToDataModel', () => {
         });
 
         it('should translate a class with an extend', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 `class testClass
 class testExtd extends testClass`
             );
@@ -121,7 +121,7 @@ class testExtd extends testClass`
         });
 
         it('should translate a class with an implement', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 `interface testInterface
 class testExtd implements testInterface`
             );
@@ -134,7 +134,7 @@ class testExtd implements testInterface`
         });
 
         it('should translate a class with an extend and 3 implements', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 `interface testInterface
 interface testInterface2
 interface testInterface3
@@ -155,13 +155,13 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         });
 
         describe('#methods', () => {
-            const umlStructure = umlToDatamodel(UML_DIAGRAMS[3]);
+            const umlStructure = UMLParser(UML_DIAGRAMS[3]);
 
             const methods = umlStructure.classes.get('test01')?.methods;
             let parameter;
 
             it('should translate 1 class with 6 methods', () => {
-                const umlStructure = umlToDatamodel(UML_DIAGRAMS[2]);
+                const umlStructure = UMLParser(UML_DIAGRAMS[2]);
 
                 assert.equal(umlStructure.classes.size, 1);
                 assert.equal(
@@ -291,7 +291,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         it('should translate a class with fullname (package + class name)', () => {
             const umlStr = 'class com.company.domain.MyClass';
 
-            const umlStructure = umlToDatamodel(umlStr);
+            const umlStructure = UMLParser(umlStr);
 
             // FQCN (fully qualified class name)
             assert.equal(umlStructure.classes.size, 1);
@@ -307,14 +307,14 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
 
     describe('Interface', () => {
         it('should have 5 interfaces', () => {
-            const umlStructure = umlToDatamodel(UML_DIAGRAMS[4]);
+            const umlStructure = UMLParser(UML_DIAGRAMS[4]);
 
             assert.equal(umlStructure.interfaces.size, 5, 'interface amount');
         });
 
         describe('#methods', () => {
             it('should have 1 interface with 6 methods', () => {
-                const umlStructure = umlToDatamodel(UML_DIAGRAMS[5]);
+                const umlStructure = UMLParser(UML_DIAGRAMS[5]);
 
                 assert.equal(
                     umlStructure.interfaces.size,
@@ -390,7 +390,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         it('should translate an interface with fullname (package + class name)', () => {
             const umlStr = 'interface com.company.project.MyInterface';
 
-            const umlStructure = umlToDatamodel(umlStr);
+            const umlStructure = UMLParser(umlStr);
 
             assert.equal(
                 umlStructure.interfaces.size,
@@ -413,7 +413,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         it('should translate an empty enum', () => {
             const enumStr = 'enum myEnum';
 
-            const umlStructure = umlToDatamodel(enumStr);
+            const umlStructure = UMLParser(enumStr);
 
             expect(umlStructure.enums.size).toEqual(1);
             const myEnum = umlStructure.enums.get('myEnum');
@@ -425,7 +425,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         it('should translate an enum with 3 property without values', () => {
             const enumStr = 'enum myEnum {\n\tPROP_1\n\tPROP_2\n\tPROP_3\n}';
 
-            const umlStructure = umlToDatamodel(enumStr);
+            const umlStructure = UMLParser(enumStr);
 
             expect(umlStructure.enums.size).toEqual(1);
             const myEnum = umlStructure.enums.get('myEnum');
@@ -452,7 +452,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
             const enumStr =
                 'enum myEnum {\n\tPROP_1 : 0\n\tPROP_2 : 1\n\tPROP_3 : 2\n}';
 
-            const umlStructure = umlToDatamodel(enumStr);
+            const umlStructure = UMLParser(enumStr);
 
             expect(umlStructure.enums.size).toEqual(1);
             const myEnum = umlStructure.enums.get('myEnum');
@@ -478,7 +478,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         it('should translate an enum with fullname (package + class name)', () => {
             const umlStr = 'enum com.some.pkg.MyEnum';
 
-            const umlStructure = umlToDatamodel(umlStr);
+            const umlStructure = UMLParser(umlStr);
 
             expect(umlStructure.enums.size).toEqual(1);
             const parsed = umlStructure.enums.get('com.some.pkg.MyEnum');
@@ -489,7 +489,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
 
     describe('Line Modifiers', () => {
         it('should extract a abstract class', () => {
-            const umlStructure = umlToDatamodel('{abstract} class c01');
+            const umlStructure = UMLParser('{abstract} class c01');
 
             expect(umlStructure.classes.size).toEqual(1);
             expect(umlStructure.classes.get('c01')).toBeDefined();
@@ -497,7 +497,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         });
 
         it('should extract a static field', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 'class c01 {\n{static}{field}integer someAttribute\n}'
             );
 
@@ -512,7 +512,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         });
 
         it('should extract a static method', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 'class c01 {\n{static}{method}integer someMet()\n}'
             );
 
@@ -529,7 +529,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         it('should log a warning for unknown modifier', () => {
             console.log = vi.fn();
 
-            umlToDatamodel('{unknown} class c01');
+            UMLParser('{unknown} class c01');
 
             expect(console.log).toHaveBeenCalledWith(
                 '[Warning] Unknow modifier : unknown'
@@ -539,7 +539,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
 
     describe('Associations', () => {
         it('should extract a composition', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 'class class01\nclass class02\nclass01 "1" o-- "1..*" class02 : Nom assoc'
             );
 
@@ -558,7 +558,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         });
 
         it('should extract an association', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 'class class01\nclass class02\nclass01 "*" -- "0..1" class02'
             );
 
@@ -577,7 +577,7 @@ class testExtd extends testClass implements testInterface, testInterface2, testI
         });
 
         it('should extract an association without multiplicity', () => {
-            const umlStructure = umlToDatamodel(
+            const umlStructure = UMLParser(
                 'class class01\nclass class02\nclass01 -- class02'
             );
 

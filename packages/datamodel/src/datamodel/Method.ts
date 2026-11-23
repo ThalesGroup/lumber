@@ -1,5 +1,4 @@
-import { VisibleType, UMLType } from './UMLType';
-import { Parameter } from './Parameter';
+import { Parameter, UMLType, VisibleType } from '.';
 
 export class Method {
     public name: string;

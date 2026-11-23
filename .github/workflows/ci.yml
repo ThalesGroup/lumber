@@ -10,12 +10,18 @@ env:
 
 jobs:
   build-test:
-    name: Build & Test (${{ matrix.project }} on ${{ matrix.os }})
+    name: Build & Test (${{ matrix.workspace }} on ${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
-        project: [javaumltranslator, protobufumltranslator]
-        os: [ubuntu-latest, windows-latest]
+        workspace:
+          [
+            javaumltranslator,
+            protobufumltranslator,
+            '@lumber/datamodel',
+            '@lumber/uml-engine',
+            '@lumber/java-engine'
+          ]
 
     runs-on: ${{ matrix.os }}
 
@@ -32,14 +38,14 @@ jobs:
         run: npm install
 
       - name: Test
-        run: npm test -w @lumber/${{ matrix.project }}
+        run: npm test -w ${{ matrix.workspace }}
 
   lint-and-format:
-    name: Lint & Format (${{ matrix.project }})
+    name: Lint & Format (${{ matrix.workspace }})
     strategy:
       fail-fast: false
       matrix:
-        project: [javaumltranslator, protobufumltranslator]
+        workspace: [javaumltranslator, protobufumltranslator]
 
     runs-on: ubuntu-latest
 
@@ -56,7 +62,7 @@ jobs:
         run: npm install
 
       - name: Lint check
-        run: npm run lint:check -w @lumber/${{ matrix.project }}
+        run: npm run lint:check -w ${{ matrix.workspace }}
 
       - name: Format check
-        run: npm run format:check -w @lumber/${{ matrix.project }}
+        run: npm run format:check -w ${{ matrix.workspace }}

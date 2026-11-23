@@ -1,22 +1,22 @@
-import { describe, expect, it } from 'vitest';
 import {
     Association,
     Attribute,
     Class,
+    DataModel,
     Enum,
     EnumProperty,
     Method,
     MultiplicityType,
     Parameter,
-    UMLStructure,
     VisibleType
-} from '../datamodel';
-import { UMLTranslator } from '../generator/UMLTranslator';
+} from '@lumber/core';
+import { describe, expect, it } from 'vitest';
+import { UMLGenerator } from '..';
 
 describe('UML Translator', () => {
     it('should translate a datamodel', () => {
-        const translator = new UMLTranslator();
-        const datamodel = new UMLStructure();
+        const translator = new UMLGenerator();
+        const datamodel = new DataModel();
         const class1 = new Class(
             'Class1',
             'ExtendClass',

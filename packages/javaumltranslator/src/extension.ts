@@ -1,14 +1,14 @@
+import { JavaParser } from '@lumber/java-engine';
+import { UMLGenerator } from '@lumber/uml-engine';
 import { readFileSync } from 'fs';
 import * as vscode from 'vscode';
 import { JavaFile, UmlToJavaTranslator } from './umltojavatranslator';
-import { JavaToUmlTranslator } from './utils/javatoumltranslator';
-import { UMLTranslator } from '@lumber/datamodel';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('javaumltranslator is now active!');
 
     const umlToJavaTranslator: UmlToJavaTranslator = new UmlToJavaTranslator();
-    const javaToUmlTranslator: JavaToUmlTranslator = new JavaToUmlTranslator();
+    const javaToUmlTranslator: JavaParser = new JavaParser();
 
     const umlToJavaDisposable = vscode.commands.registerCommand(
         'javaumltranslator.umlToJava',
@@ -99,7 +99,7 @@ export function activate(context: vscode.ExtensionContext) {
                     }
                 );
 
-                const umlTranslator = new UMLTranslator();
+                const umlTranslator = new UMLGenerator();
 
                 const umlStr = umlTranslator.translateAll(datamodel);
 

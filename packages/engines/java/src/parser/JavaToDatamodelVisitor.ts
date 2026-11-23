@@ -1,4 +1,17 @@
 import {
+    Association,
+    Attribute,
+    Class,
+    DataModel,
+    Enum,
+    EnumProperty,
+    Interface,
+    Method,
+    MultiplicityType,
+    Parameter,
+    VisibleType
+} from '@lumber/core';
+import {
     BaseJavaCstVisitorWithDefaults,
     ClassBodyCtx,
     ClassBodyDeclarationCtx,
@@ -57,19 +70,6 @@ import {
     VariableDeclaratorListCtx,
     VariableParaRegularParameterCtx
 } from 'java-parser';
-import {
-    Association,
-    Attribute,
-    Class,
-    Enum,
-    EnumProperty,
-    Interface,
-    Method,
-    MultiplicityType,
-    Parameter,
-    UMLStructure,
-    VisibleType
-} from '@lumber/datamodel';
 
 type ClassMembers = {
     methods: Map<string, Method>;
@@ -77,19 +77,19 @@ type ClassMembers = {
 };
 
 export class JavaToDatamodelVisitor extends BaseJavaCstVisitorWithDefaults {
-    private structure: UMLStructure;
+    private structure: DataModel;
     private currentPackage: string;
     private allImports: ImportDeclarationCtx[];
 
     constructor() {
         super();
-        this.structure = new UMLStructure();
+        this.structure = new DataModel();
         this.currentPackage = '';
         this.allImports = [];
         this.validateVisitor();
     }
 
-    get datamodel(): UMLStructure {
+    get datamodel(): DataModel {
         return this.structure;
     }
 

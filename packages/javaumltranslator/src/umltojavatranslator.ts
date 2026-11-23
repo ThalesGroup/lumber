@@ -1,11 +1,6 @@
-import {
-    Class,
-    Enum,
-    Interface,
-    UMLStructure,
-    umlToDatamodel
-} from '@lumber/datamodel';
+import { Class, DataModel, Enum, Interface } from '@lumber/core';
 import { JavaGenerator } from '@lumber/java-engine';
+import { UMLParser } from '@lumber/uml-engine';
 
 export class JavaFile {
     public name = '';
@@ -42,7 +37,7 @@ export class UmlToJavaTranslator {
     public toJava(umlCode: string): JavaFile[] {
         const javaFiles: Array<JavaFile> = [];
 
-        const umlStructure: UMLStructure = umlToDatamodel(umlCode);
+        const umlStructure: DataModel = UMLParser(umlCode);
 
         const translator = new JavaGenerator();
 

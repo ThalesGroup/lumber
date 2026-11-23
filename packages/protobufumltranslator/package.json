@@ -1,5 +1,5 @@
 {
-    "name": "@lumber/protobufumltranslator",
+    "name": "protobufumltranslator",
     "version": "1.2.0",
     "description": "A VSC extension to translate plantUML into Protobuf",
     "main": "dist/main.js",
@@ -88,6 +88,7 @@
         "word-wrap": ">=1.2.5"
     },
     "dependencies": {
-        "@lumber/datamodel": "1.2.0"
+        "@lumber/core": "^1.2.0",
+        "@lumber/uml-engine": "^1.0.0"
     }
 }

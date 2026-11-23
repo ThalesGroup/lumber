@@ -2,11 +2,12 @@
     "name": "lumber",
     "private": true,
     "workspaces": [
+        "packages/core",
         "packages/datamodel",
         "packages/javaumltranslator",
         "packages/protobufumltranslator",
-        "packages/test",
-        "packages/engines/java"
+        "packages/engines/java",
+        "packages/engines/uml"
     ],
     "devDependencies": {
         "@types/node": "^26.6.6",

@@ -1,12 +1,12 @@
 import {
     Attribute,
     Class,
+    DataModel,
     Enum,
     IDataModelTranslator,
     Interface,
-    UMLStructure,
     UMLType
-} from '@lumber/datamodel';
+} from '@lumber/core';
 
 const NATIVES_TYPES = [
     'double',
@@ -212,7 +212,7 @@ export class ProtobufTranslator implements IDataModelTranslator {
             .join('\n\n');
     }
 
-    processAssociations(dataModel: UMLStructure) {
+    processAssociations(dataModel: DataModel) {
         dataModel.associations.forEach((association) => {
             const leftClass = dataModel.classes.get(association.leftClass);
             const rightClass = dataModel.classes.get(association.rightClass);
@@ -232,7 +232,7 @@ export class ProtobufTranslator implements IDataModelTranslator {
         });
     }
 
-    translateAll(dataModel: UMLStructure): string {
+    translateAll(dataModel: DataModel): string {
         const classAmount = dataModel.classes.size;
         const interfaceAmount = dataModel.interfaces.size;
         const enumAmount = dataModel.enums.size;

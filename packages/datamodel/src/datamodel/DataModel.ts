@@ -1,9 +1,6 @@
-import { Class } from './Class';
-import { Enum } from './Enum';
-import { Interface } from './Interface';
-import { Association } from './Association';
+import { Association, Class, Enum, Interface } from '.';
 
-export class UMLStructure {
+export class DataModel {
     public classes: Map<string, Class>;
     public interfaces: Map<string, Interface>;
     public enums: Map<string, Enum>;

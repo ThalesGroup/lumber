@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
 
+import { UMLParser } from '@lumber/uml-engine';
 import { readFileSync } from 'fs';
-import { umlToDatamodel } from '@lumber/datamodel';
 import { ProtobufTranslator } from './ProtobufTranslator';
 
 const TRANSLATOR = new ProtobufTranslator();
 
 async function umlToProtobuf(previewToSide: boolean, umlStr: string) {
-    const dataModel = umlToDatamodel(umlStr);
+    const dataModel = UMLParser(umlStr);
 
     const protobufStr = TRANSLATOR.translateAll(dataModel);
 

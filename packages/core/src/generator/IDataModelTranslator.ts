@@ -1,7 +1,4 @@
-import { Class } from '../datamodel/Class';
-import { Enum } from '../datamodel/Enum';
-import { Interface } from '../datamodel/Interface';
-import { UMLStructure } from '../datamodel/UMLStructure';
+import { Class, DataModel, Enum, Interface } from '@lumber/datamodel';
 
 export interface IDataModelTranslator {
     translateInterface(interfaceModel: Interface): string;
@@ -13,5 +10,5 @@ export interface IDataModelTranslator {
     translateEnum(enumModel: Enum): string;
     translateEnums(enums: Map<string, Enum>): string;
 
-    translateAll(dataModel: UMLStructure): string;
+    translateAll(dataModel: DataModel): string;
 }

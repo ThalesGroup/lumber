@@ -1,13 +1,11 @@
-import { Method } from './Method';
-import { UMLStructure } from './UMLStructure';
-import { VisibleType } from './UMLType';
+import { DataModel, Method, VisibleType } from '.';
 
 export class Interface {
     public name = '';
     public methods: Map<string, Method>;
     public visibility: VisibleType;
 
-    public dataModel?: UMLStructure;
+    public dataModel?: DataModel;
 
     constructor(
         name: string,

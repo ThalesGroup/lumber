@@ -1,4 +1,11 @@
 {
-  "files": [],
-  "references": [{ "path": "packages/datamodel" }, { "path": "packages/javaumltranslator" }, { "path": "packages/protobufumltranslator" }]
+    "files": [],
+    "references": [
+        { "path": "packages/core" },
+        { "path": "packages/datamodel" },
+        { "path": "packages/javaumltranslator" },
+        { "path": "packages/protobufumltranslator" },
+        { "path": "packages/engines/java" },
+        { "path": "packages/engines/uml" }
+    ]
 }

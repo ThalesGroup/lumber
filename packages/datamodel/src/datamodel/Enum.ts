@@ -1,4 +1,4 @@
-import { EnumProperty } from './EnumProperty';
+import { EnumProperty } from '.';
 
 export class Enum {
     public name: string;

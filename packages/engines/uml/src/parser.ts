@@ -1,16 +1,20 @@
 import {
-    Enum,
     Association,
-    MultiplicityType,
     Attribute,
     Class,
+    DataModel,
+    Enum,
+    EnumProperty,
     Interface,
     Method,
-    UMLStructure,
-    EnumProperty
-} from '../datamodel';
+    MultiplicityType
+} from '../../../datamodel/src/datamodel';
 
-import { UMLType, VISIBLE_TYPES, Modifiers } from '../datamodel/UMLType';
+import {
+    Modifiers,
+    UMLType,
+    VISIBLE_TYPES
+} from '../../../datamodel/src/datamodel/UMLType';
 
 function lineFromIndex(str: string, ind: number) {
     return str.slice(0, ind).split(/\n/g).length - 1;
@@ -31,7 +35,7 @@ function getMultiplicityType(mult: string): MultiplicityType {
     }
 }
 
-export function umlToDatamodel(umlStr: string): UMLStructure {
+export function UMLParser(umlStr: string): DataModel {
     const classes: Map<string, Class> = new Map();
     const interfaces: Map<string, Interface> = new Map();
     const enums: Map<string, Enum> = new Map();
@@ -387,5 +391,5 @@ export function umlToDatamodel(umlStr: string): UMLStructure {
         associations.push(association);
     }
 
-    return new UMLStructure(classes, interfaces, enums, associations);
+    return new DataModel(classes, interfaces, enums, associations);
 }

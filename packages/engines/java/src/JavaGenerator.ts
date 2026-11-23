@@ -1,13 +1,13 @@
 import {
     Class,
+    DataModel,
     Enum,
     IDataModelTranslator,
     Interface,
     Method,
     Parameter,
-    UMLStructure,
     VisibleType
-} from '@lumber/datamodel';
+} from '@lumber/core';
 
 export class JavaGenerator implements IDataModelTranslator {
     addSpaceIfNotNull(vis: VisibleType): string {
@@ -120,7 +120,7 @@ export class JavaGenerator implements IDataModelTranslator {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    translateAll(dataModel: UMLStructure): string {
+    translateAll(dataModel: DataModel): string {
         throw new Error('Method not implemented.');
     }
 }

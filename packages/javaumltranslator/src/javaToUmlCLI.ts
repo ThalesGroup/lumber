@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
+import { JavaParser } from '@lumber/java-engine';
+import { UMLGenerator } from '@lumber/uml-engine';
 import { program } from 'commander';
-import { lstat, opendir, readFile, writeFile } from 'fs/promises';
-import { parse } from 'java-parser';
+import { lstat, opendir, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { exit } from 'process';
-import { UMLTranslator } from '@lumber/datamodel';
-import { JavaToDatamodelVisitor } from './utils/JavaToDatamodelVisitor';
 
 program
     .version('1.0.0')
@@ -19,19 +18,17 @@ program
         '<javaDir>',
         'Root directory in which the parsing will start, it can also be a java file'
     )
-    .action(async (javaDir, options) => {
+    .action(async (javaDir: string, options) => {
         if (!options.outfile.includes('.')) {
             options.outfile += '.puml';
         }
-
-        const myVisitor = new JavaToDatamodelVisitor();
 
         const dirs = [javaDir];
         const files = [];
 
         console.log('Searching java files...');
         while (dirs.length) {
-            const currentDir = dirs.shift();
+            const currentDir = dirs.shift()!;
 
             try {
                 const stats = await lstat(currentDir);
@@ -54,16 +51,10 @@ program
         }
 
         console.log('Starting parsing files...');
-        for (const file of files) {
-            myVisitor.clear();
-            console.log(`- Parsing : ${file}...`);
-            const cst = parse(await readFile(file, { encoding: 'utf-8' }));
-            myVisitor.visit(cst);
-        }
 
-        const datamodel = myVisitor.datamodel;
+        const datamodel = await new JavaParser().parse(files);
 
-        const umlDiagram = new UMLTranslator().translateAll(datamodel);
+        const umlDiagram = new UMLGenerator().translateAll(datamodel);
 
         writeFile(options.outfile, umlDiagram)
             .then(() => {

@@ -2,17 +2,17 @@ import {
     Association,
     Attribute,
     Class,
+    DataModel,
     Enum,
     EnumProperty,
     Interface,
     Method,
     MultiplicityType,
-    Parameter,
-    UMLStructure
-} from '@lumber/datamodel';
+    Parameter
+} from '@lumber/core';
 import { ProtobufTranslator } from '../ProtobufTranslator';
 
-const dataModel = new UMLStructure();
+const dataModel = new DataModel();
 const class1 = new Class('Class1', 'ExtendClass');
 class1.addAttribute(new Attribute('attr1', 'Map'));
 class1.addAttribute(new Attribute('attr2', 'int'));
@@ -174,7 +174,7 @@ describe('Templates', () => {
                 MultiplicityType.NotSpecified,
                 'myClass2'
             );
-            const dataModel = new UMLStructure();
+            const dataModel = new DataModel();
             dataModel.addClass(class1);
             dataModel.addClass(class2);
             dataModel.addAssociation(association);
@@ -202,7 +202,7 @@ describe('Templates', () => {
                 MultiplicityType.NotSpecified,
                 'myClass2'
             );
-            const dataModel = new UMLStructure();
+            const dataModel = new DataModel();
             dataModel.addClass(class1);
             dataModel.addClass(class2);
             dataModel.addAssociation(association);
@@ -230,7 +230,7 @@ describe('Templates', () => {
                 MultiplicityType.NotSpecified,
                 'myClass2'
             );
-            const dataModel = new UMLStructure();
+            const dataModel = new DataModel();
             dataModel.addClass(class1);
             dataModel.addClass(class2);
             dataModel.addAssociation(association);
@@ -252,7 +252,7 @@ describe('Templates', () => {
         const resultStart =
             'syntax = "proto3";\n\nimport "google/protobuf/empty.proto";\n\noption java_multiple_files = true;\noption java_generic_services = false;\noption java_package = "{{packageName}}";\n\n';
         it('should translate some classes', () => {
-            const myDataModel = new UMLStructure(dataModel.classes);
+            const myDataModel = new DataModel(dataModel.classes);
 
             const resultStr = translator.translateAll(myDataModel);
 
@@ -266,10 +266,7 @@ describe('Templates', () => {
             );
         });
         it('should translate some interfaces', () => {
-            const myDataModel = new UMLStructure(
-                undefined,
-                dataModel.interfaces
-            );
+            const myDataModel = new DataModel(undefined, dataModel.interfaces);
 
             const resultStr = translator.translateAll(myDataModel);
 
@@ -286,7 +283,7 @@ describe('Templates', () => {
         });
 
         it('should translate some enums', () => {
-            const myDataModel = new UMLStructure(
+            const myDataModel = new DataModel(
                 undefined,
                 undefined,
                 dataModel.enums

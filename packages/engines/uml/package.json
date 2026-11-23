@@ -1,0 +1,35 @@
+{
+  "name": "@lumber/uml-engine",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Valentin COLOMER",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+        "types": "./dist/index.d.ts",
+        "require": "./dist/index.js",
+        "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "lint:check": "eslint .",
+    "lint:write": "eslint . --fix",
+    "format:write": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run --coverage --config vitest.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThalesGroup/lumber.git"
+  },
+  "keywords": [
+    "plantuml",
+    "puml"
+  ],
+  "dependencies": {
+    "@lumber/core": "^1.2.0"
+  }
+}

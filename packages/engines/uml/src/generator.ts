@@ -1,19 +1,31 @@
-import { IDataModelTranslator } from '.';
 import {
     Association,
     Attribute,
     Class,
+    DataModel,
     Enum,
     EnumProperty,
+    GeneratedFile,
+    Generator,
     Interface,
     Method,
     MultiplicityType,
     Parameter,
-    UMLStructure,
     VISIBLE_TYPES_TO_UML
-} from '../datamodel';
+} from '@lumber/core';
 
-export class UMLTranslator implements IDataModelTranslator {
+export class UMLGenerator implements Generator {
+    generate(model: DataModel): Promise<GeneratedFile[]> {
+        const umlString = this.translateAll(model);
+
+        return Promise.resolve([
+            {
+                path: 'diagram.puml',
+                content: umlString
+            }
+        ]);
+    }
+
     translateParameters(params: Parameter[]): string {
         return params.map((p) => p.name + ' : ' + p.type).join(', ');
     }
@@ -148,7 +160,7 @@ export class UMLTranslator implements IDataModelTranslator {
             .join('\n');
     }
 
-    translateAll(dataModel: UMLStructure) {
+    translateAll(dataModel: DataModel) {
         let resultStr = '@startuml\n';
 
         if (dataModel.classes.size)

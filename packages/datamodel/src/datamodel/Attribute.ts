@@ -1,4 +1,4 @@
-import { VisibleType } from './UMLType';
+import { VisibleType } from '.';
 
 export class Attribute {
     public name: string;

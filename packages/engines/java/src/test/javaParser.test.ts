@@ -1,7 +1,7 @@
+import { Parameter } from '@lumber/core';
 import { parse } from 'java-parser';
-import { Parameter } from '@lumber/datamodel';
 import { describe, expect, it } from 'vitest';
-import { JavaToDatamodelVisitor } from '../utils/JavaToDatamodelVisitor';
+import { JavaToDatamodelVisitor } from '../parser/JavaToDatamodelVisitor';
 
 describe('Parser', () => {
     describe('Class', () => {

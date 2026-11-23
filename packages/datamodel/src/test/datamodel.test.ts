@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
     Association,
     Attribute,
     Class,
+    DataModel,
     Enum,
     EnumProperty,
+    Interface,
     Method,
     MultiplicityType,
     Parameter,
-    VisibleType,
-    Interface,
-    UMLStructure
+    VisibleType
 } from '../datamodel';
 
 describe('DataModel', () => {
@@ -340,19 +340,19 @@ describe('DataModel', () => {
         });
     });
 
-    describe('UMLStructure', () => {
-        it('should create an UMLStructure', () => {
-            const umlStruct = new UMLStructure();
+    describe('DataModel', () => {
+        it('should create an DataModel', () => {
+            const umlStruct = new DataModel();
 
             expect(umlStruct.classes.size).toEqual(0);
             expect(umlStruct.interfaces.size).toEqual(0);
             expect(umlStruct.enums.size).toEqual(0);
         });
 
-        it('should create an UMLStructure with some classes', () => {
+        it('should create an DataModel with some classes', () => {
             const class1 = new Class('class01');
             const class2 = new Class('class02');
-            const umlStruct = new UMLStructure(
+            const umlStruct = new DataModel(
                 new Map([
                     ['class01', class1],
                     ['class02', class2]
@@ -364,10 +364,10 @@ describe('DataModel', () => {
             expect(umlStruct.classes.get('class02')).toBe(class2);
         });
 
-        it('should create an UMLStructure with some interfaces', () => {
+        it('should create an DataModel with some interfaces', () => {
             const interface1 = new Interface('interface01');
             const interface2 = new Interface('interface02');
-            const umlStruct = new UMLStructure(
+            const umlStruct = new DataModel(
                 undefined,
                 new Map([
                     ['interface01', interface1],
@@ -380,10 +380,10 @@ describe('DataModel', () => {
             expect(umlStruct.interfaces.get('interface02')).toBe(interface2);
         });
 
-        it('should create an UMLStructure with some interfaces', () => {
+        it('should create an DataModel with some interfaces', () => {
             const enum1 = new Enum('enum01');
             const enum2 = new Enum('enum02');
-            const umlStruct = new UMLStructure(
+            const umlStruct = new DataModel(
                 undefined,
                 undefined,
                 new Map([
@@ -397,15 +397,13 @@ describe('DataModel', () => {
             expect(umlStruct.enums.get('enum02')).toBe(enum2);
         });
 
-        it('should create an UMLStructure with some associations', () => {
+        it('should create an DataModel with some associations', () => {
             const asso1 = new Association('class01', 'class02');
             const asso2 = new Association('class01', 'class03');
-            const umlStruct = new UMLStructure(
-                undefined,
-                undefined,
-                undefined,
-                [asso1, asso2]
-            );
+            const umlStruct = new DataModel(undefined, undefined, undefined, [
+                asso1,
+                asso2
+            ]);
 
             expect(umlStruct.associations.length).toEqual(2);
             expect(umlStruct.associations[0]).toBe(asso1);
@@ -414,7 +412,7 @@ describe('DataModel', () => {
 
         describe('#methods', () => {
             it('should add some classes', () => {
-                const umlStruct = new UMLStructure();
+                const umlStruct = new DataModel();
                 const class1 = new Class('class01');
                 const class2 = new Class('class02');
 
@@ -428,7 +426,7 @@ describe('DataModel', () => {
             });
 
             it('should add some interfaces', () => {
-                const umlStruct = new UMLStructure();
+                const umlStruct = new DataModel();
                 const interface1 = new Interface('interface01');
                 const interface2 = new Interface('interface02');
 
@@ -446,7 +444,7 @@ describe('DataModel', () => {
             });
 
             it('should add some enums', () => {
-                const umlStruct = new UMLStructure();
+                const umlStruct = new DataModel();
                 const enum1 = new Enum('enum01');
                 const enum2 = new Enum('enum02');
 
@@ -460,7 +458,7 @@ describe('DataModel', () => {
             });
 
             it('should add some associations', () => {
-                const umlStruct = new UMLStructure();
+                const umlStruct = new DataModel();
                 const asso1 = new Association('class01', 'class02');
                 const asso2 = new Association('class01', 'class03');
 

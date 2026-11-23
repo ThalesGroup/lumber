@@ -1,7 +1,4 @@
-import { Attribute } from './Attribute';
-import { Method } from './Method';
-import { UMLStructure } from './UMLStructure';
-import { VisibleType } from './UMLType';
+import { Attribute, DataModel, Method, VisibleType } from '.';
 
 export class Class {
     public name = '';
@@ -10,7 +7,7 @@ export class Class {
     public isAbstract: boolean;
     public visibility: VisibleType;
 
-    public dataModel?: UMLStructure;
+    public dataModel?: DataModel;
 
     public extends?: string;
     public implements: Array<string>;
@@ -23,7 +20,7 @@ export class Class {
         methods: Map<string, Method> = new Map(),
         isAbstract = false,
         visibility: VisibleType = VisibleType.Public,
-        dataModel: UMLStructure | undefined = undefined
+        dataModel: DataModel | undefined = undefined
     ) {
         this.attributes = attributes;
         this.methods = methods;
