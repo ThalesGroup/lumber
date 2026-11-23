@@ -1,24 +1,11 @@
 import { lstat, opendir, readFile } from 'fs/promises';
 import { parse } from 'java-parser';
 import { join } from 'path';
-import { UMLStructure, UMLTranslator } from '@lumber/datamodel';
 import * as vscode from 'vscode';
 import { JavaToDatamodelVisitor } from './JavaToDatamodelVisitor';
 
 export class JavaToUmlTranslator {
-    public async translate(
-        fromUri: string[],
-        progress?: vscode.Progress<{
-            message?: string | undefined;
-            increment?: number | undefined;
-        }>
-    ) {
-        const datamodel = await this.toDatamodel(fromUri, progress);
-
-        return this.toUml(datamodel);
-    }
-
-    public async toDatamodel(
+    public async parse(
         fromUri: string[],
         progress?: vscode.Progress<{
             message?: string | undefined;
@@ -79,11 +66,5 @@ export class JavaToUmlTranslator {
         }
 
         return myVisitor.datamodel;
-    }
-
-    public toUml(datamodel: UMLStructure): string {
-        const translator = new UMLTranslator();
-
-        return translator.translateAll(datamodel);
     }
 }

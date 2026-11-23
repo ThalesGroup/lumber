@@ -75,6 +75,7 @@
   },
   "dependencies": {
     "@lumber/datamodel": "1.2.0",
+    "@lumber/java-engine": "^1.0.0",
     "braces": ">=3.0.3",
     "commander": "^12.1.0",
     "java-parser": "^3.0.1",

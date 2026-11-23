@@ -5,7 +5,7 @@ import {
     UMLStructure,
     umlToDatamodel
 } from '@lumber/datamodel';
-import { JavaTranslator } from './JavaTranslator';
+import { JavaGenerator } from '@lumber/java-engine';
 
 export class JavaFile {
     public name = '';
@@ -44,7 +44,7 @@ export class UmlToJavaTranslator {
 
         const umlStructure: UMLStructure = umlToDatamodel(umlCode);
 
-        const translator = new JavaTranslator();
+        const translator = new JavaGenerator();
 
         umlStructure.classes.forEach((classModel: Class) => {
             const { name, package: packageName } = this.parseNameAndPackage(

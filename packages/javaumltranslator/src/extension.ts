@@ -2,6 +2,7 @@ import { readFileSync } from 'fs';
 import * as vscode from 'vscode';
 import { JavaFile, UmlToJavaTranslator } from './umltojavatranslator';
 import { JavaToUmlTranslator } from './utils/javatoumltranslator';
+import { UMLTranslator } from '@lumber/datamodel';
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('javaumltranslator is now active!');
@@ -89,7 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
                         title: 'Reading files'
                     },
                     (progress) => {
-                        const datamodel = javaToUmlTranslator.toDatamodel(
+                        const datamodel = javaToUmlTranslator.parse(
                             sourceFolders?.map((uri) => uri.fsPath) || [],
                             progress
                         );
@@ -98,7 +99,9 @@ export function activate(context: vscode.ExtensionContext) {
                     }
                 );
 
-                const umlStr = javaToUmlTranslator.toUml(datamodel);
+                const umlTranslator = new UMLTranslator();
+
+                const umlStr = umlTranslator.translateAll(datamodel);
 
                 const document = await vscode.workspace.openTextDocument({
                     content: umlStr,

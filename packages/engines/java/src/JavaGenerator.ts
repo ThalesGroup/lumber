@@ -9,7 +9,7 @@ import {
     VisibleType
 } from '@lumber/datamodel';
 
-export class JavaTranslator implements IDataModelTranslator {
+export class JavaGenerator implements IDataModelTranslator {
     addSpaceIfNotNull(vis: VisibleType): string {
         return vis ? vis.toString() + ' ' : '';
     }

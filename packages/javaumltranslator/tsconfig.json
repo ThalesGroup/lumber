@@ -4,6 +4,6 @@
         "outDir": "out",
         "rootDir": "src"
     },
-    "references": [{ "path": "../datamodel" }],
+    "references": [{ "path": "../datamodel" }, { "path": "../engines/java" }],
     "include": ["src"]
 }

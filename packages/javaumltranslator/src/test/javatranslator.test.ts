@@ -8,9 +8,9 @@ import {
     VisibleType
 } from '@lumber/datamodel';
 import { describe, it } from 'vitest';
-import { JavaTranslator } from '../JavaTranslator';
+import { JavaGenerator } from '@lumber/java-engine/src/JavaGenerator';
 
-const TRANSLATOR = new JavaTranslator();
+const TRANSLATOR = new JavaGenerator();
 
 describe('Templates', () => {
     describe('Class', () => {
