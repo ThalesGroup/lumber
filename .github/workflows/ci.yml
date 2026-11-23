@@ -10,20 +10,18 @@ env:
 
 jobs:
   build-test:
-    name: Build & Test (${{ matrix.workspace }} on ${{ matrix.os }})
+    name: Build & Test (${{ matrix.workspace }}
     strategy:
       fail-fast: false
       matrix:
         workspace:
           [
-            javaumltranslator,
-            protobufumltranslator,
+            'javaumltranslator',
+            'protobufumltranslator',
             '@lumber/datamodel',
             '@lumber/uml-engine',
             '@lumber/java-engine'
           ]
-
-    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
