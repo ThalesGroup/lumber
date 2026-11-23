@@ -1,6 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 const { defaults } = require('jest-config');
 module.exports = {
+    roots: ['<rootDir>/src/'],
+
     moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
 
     collectCoverage: true,
