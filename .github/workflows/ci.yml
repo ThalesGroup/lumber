@@ -16,7 +16,6 @@ jobs:
       matrix:
         workspace:
           [
-            'javaumltranslator',
             'protobufumltranslator',
             '@lumber/datamodel',
             '@lumber/uml-engine',

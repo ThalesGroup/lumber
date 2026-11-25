@@ -19,7 +19,7 @@
     "lint:write": "eslint . --fix",
     "format:write": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run --coverage --config vitest.config.ts"
+    "test": "npm run build && vitest run --coverage --config vitest.config.ts"
   },
   "repository": {
     "type": "git",
